@@ -33,6 +33,8 @@ class CreateEstablecimientoSerializer(serializers.ModelSerializer):
         fields = ('nombre', 'ciudad', 'direccion', 'categoria', 'latitud', 'longitud')
 
 class UpdatePDISerializer(serializers.ModelSerializer):
+    id = serializers.CharField(validators=[])
+
     class Meta:
         model = PDI
-        fields = ('estado')
+        fields = ('id', 'usuario', 'estado')

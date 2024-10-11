@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics, status
 from .serializers import PDISerializer, EventoSerializer, EstablecimientoSerializer, CreateEventoSerializer, CreateEstablecimientoSerializer, UpdatePDISerializer
-from .models import PDI, Evento, Establecimiento
+from .models import PDI, Usuario, Evento, Establecimiento
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import JsonResponse
@@ -64,6 +64,25 @@ class AceptarPDI(APIView):
 
     def patch(self, request, format=None):
         serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            id = serializer.data.get('id')
+            usuario = serializer.data.get('usuario')
+            estado = serializer.data.get('estado')
+
+            queryset = PDI.objects.filter(id=id)
+            if not queryset.exists():
+                return Response({'msg': 'Punto de interés no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+
+            pdi = queryset[0]
+            user_id = Usuario.objects.filter(estado=True)
+            if usuario != user_id:
+                return Response({'msg': 'No es posible realizar esta acción.'}, status=status.HTTP_403_FORBIDDEN)
+
+            pdi.estado = estado
+            pdi.save(update_fields=['estado'])
+            return Response(PDISerializer(pdi).data, status=status.HTTP_200_OK)
+
+        return Response({'Bad Request': "Invalid Data..."}, status=status.HTTP_400_BAD_REQUEST)
 
 def eliminarPDI(request, id_punto):
     exito = gestor_puntos.eliminar_punto_de_interes(id_punto)
