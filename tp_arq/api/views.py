@@ -9,7 +9,7 @@ from .gestor import GestorPDI
 
 gestor_puntos = GestorPDI()
 
-class PDIiew(generics.ListAPIView):
+class PDIView(generics.ListAPIView):
     queryset = gestor_puntos.listarPDIs()
     serializer_class = PDISerializer
 
@@ -73,9 +73,9 @@ class AceptarPDI(APIView):
             if not queryset.exists():
                 return Response({'msg': 'Punto de interés no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
 
-            pdi = queryset[0]
-            user_id = Usuario.objects.filter(estado=True)
-            if usuario != user_id:
+            pdi = queryset.first()
+            user = Usuario.objects.filter(mail=usuario, es_admin=True).first()
+            if not user:
                 return Response({'msg': 'No es posible realizar esta acción.'}, status=status.HTTP_403_FORBIDDEN)
 
             pdi.estado = estado
@@ -84,9 +84,9 @@ class AceptarPDI(APIView):
 
         return Response({'Bad Request': "Invalid Data..."}, status=status.HTTP_400_BAD_REQUEST)
 
-def eliminarPDI(request, id_punto):
-    exito = gestor_puntos.eliminar_punto_de_interes(id_punto)
-    if exito:
-        return JsonResponse({'mensaje': 'Punto de interés eliminado con éxito'})
-    else:
-        return JsonResponse({'mensaje': 'Punto de interés no encontrado'}, status=404)
+# def eliminarPDI(request, id_punto):
+#     exito = gestor_puntos.eliminar_punto_de_interes(id_punto)
+#     if exito:
+#         return JsonResponse({'mensaje': 'Punto de interés eliminado con éxito'})
+#     else:
+#         return JsonResponse({'mensaje': 'Punto de interés no encontrado'}, status=404)

@@ -7,7 +7,7 @@ import string
 
 
 def validate_password_length(value):
-    if len(value) > 8:
+    if len(value) < 8:
         raise ValidationError(
             _("La contraseña debe tener al menos 8 caracteres.")
         )
@@ -42,23 +42,20 @@ class PDI(models.Model):
         ('C', 'Cine'),
         ('A', 'Artesanías')
     ]
-    id = models.CharField(max_length=8, default=generate_unique_id, unique=True)
+    id = models.CharField(max_length=8, default=generate_unique_id, unique=True, primary_key=True)
     nombre = models.CharField(max_length=50, null=False, unique=False)
     ciudad = models.CharField(max_length=50, null=False, unique=False)
     direccion = models.CharField(max_length=50, null=False, unique=False)
     categoria = models.CharField(max_length=15, choices=categorias)
     descripcion = models.CharField(max_length=250, default='')
-    latitud = models.FloatField(max_length=15, validators=[MinValueValidator(-90), MaxValueValidator(90)])
-    longitud = models.FloatField(max_length=15, validators=[MinValueValidator(-180), MaxValueValidator(180)])
+    latitud = models.FloatField(validators=[MinValueValidator(-90), MaxValueValidator(90)])
+    longitud = models.FloatField(validators=[MinValueValidator(-180), MaxValueValidator(180)])
     estado = models.BooleanField(null=False, default=False)
 
-    class Meta:
-        abstract = True
-
 class Evento(PDI):
-    dia = models.IntegerField(null=False)
-    mes = models.IntegerField(null=False)
-    ano = models.IntegerField(null=False)
+    dia = models.IntegerField(null=False, validators=[MinValueValidator(1), MaxValueValidator(31)])
+    mes = models.IntegerField(null=False, validators=[MinValueValidator(1), MaxValueValidator(12)])
+    ano = models.IntegerField(null=False, validators=[MinValueValidator(1900), MaxValueValidator(2100)])
     horaInicio = models.IntegerField(null=False)
     minutoInicio = models.IntegerField(null=False)
     duracion = models.IntegerField(null=False)
