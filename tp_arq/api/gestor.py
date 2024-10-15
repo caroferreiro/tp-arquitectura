@@ -16,7 +16,7 @@ class GestorPDI:
         nuevo_evento.save()
         return nuevo_evento
     
-    def agregar_estableiciento(self, nombre, ciudad, direccion, categoria, descripcion, latitud, longitud):
+    def agregar_establecimiento(self, nombre, ciudad, direccion, categoria, descripcion, latitud, longitud):
         nuevo_establecimiento = Establecimiento(nombre=nombre, ciudad=ciudad, direccion=direccion, categoria=categoria, descripcion=descripcion, latitud=latitud, longitud=longitud)
         nuevo_establecimiento.save()
         return nuevo_establecimiento

@@ -35,6 +35,7 @@ class AgregarEvento(APIView):
                 minutoInicio=serializer.data.get('minutoInicio'),
                 duracion=serializer.data.get('duracion'),
             )
+            nuevo_evento = serializer.save()
             return Response(EventoSerializer(nuevo_evento).data, status=status.HTTP_201_CREATED)
 
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)

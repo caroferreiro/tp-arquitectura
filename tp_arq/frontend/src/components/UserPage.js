@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Grid2 as Grid, Button, Typography, ButtonGroup } from "@mui/material";
 import CodigoAdminPage from "./CodigoAdminPage";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import AgregarPDIPage from "./AgregarPDIPage";
+import AgregarEventoPage from "./AgregarEventoPage";
+import AgregarEstablecimientoPage from "./AgregarEstablecimientoPage";
 
 export default class UserPage extends Component {
   constructor(props) {
@@ -54,6 +57,9 @@ export default class UserPage extends Component {
             }
           />
           <Route path="/validar-administrador" element={<CodigoAdminPage />} />
+          <Route path="/agregarPDI" element={<AgregarPDIPage />} />
+          <Route path="/agregarEvento" element={<AgregarEventoPage />} />
+          <Route path="/agregarEstablecimiento" element={<AgregarEstablecimientoPage />} />
         </Routes>
       </Router> 
     ); 

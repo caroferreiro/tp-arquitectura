@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Grid2 as Grid, Button, Typography, ButtonGroup } from "@mui/material";
-import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import AgregarEventoPage from "./AgregarEventoPage";
+import AgregarEstablecimientoPage from "./AgregarEstablecimientoPage";
 
 export default class AgregarPDIPage extends Component {
   constructor(props) {
@@ -21,7 +23,8 @@ export default class AgregarPDIPage extends Component {
               color="primary"
               variant="contained"
               size="large"
-              onClick={() => {}}
+              component={Link}
+              to="/agregarEvento"
             >
               Evento
             </Button>
@@ -29,7 +32,8 @@ export default class AgregarPDIPage extends Component {
               color="secondary"
               variant="contained"
               size="large"
-              onClick={() => {}}
+              component={Link}
+              to="/agregarEstablecimiento"
             >
               Establecimiento
             </Button>
@@ -44,6 +48,6 @@ export default class AgregarPDIPage extends Component {
       <div>
         {this.renderCreateButtons()}
       </div>
-    );
+    ); 
   }
 }

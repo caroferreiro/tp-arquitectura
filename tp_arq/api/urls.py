@@ -7,4 +7,3 @@ urlpatterns = [
     path('agregar-establecimiento', AgregarEstablecimiento.as_view()),
     path('aceptar-pdi', AceptarPDI.as_view())
 ]
-

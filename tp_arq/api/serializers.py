@@ -3,34 +3,34 @@ from .models import PDI, Evento, Establecimiento
 
 class PDISerializer(serializers.ModelSerializer):
     class Meta:
-        model = Establecimiento
-        fields = ('id', 'nombre', 'ciudad', 'direccion',
-                  'categoria', 'latitud', 'longitud', 'estado')
+        model = PDI
+        fields = ('id', 'nombre', 'ciudad', 'direccion', 'categoria',
+                  'descripcion', 'latitud', 'longitud', 'estado')
 
 class EventoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Evento
         fields = ('id', 'nombre', 'ciudad', 'direccion', 'categoria', 
-                  'latitud', 'longitud', 'estado', 'dia', 'mes', 'ano',
-                  'horaInicio', 'minutoInicio', 'duracion')
+                  'descripcion', 'latitud', 'longitud', 'estado', 'dia', 
+                  'mes', 'ano', 'horaInicio', 'minutoInicio', 'duracion')
 
 class EstablecimientoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Establecimiento
-        fields = ('id', 'nombre', 'ciudad', 'direccion',
-                  'categoria', 'latitud', 'longitud', 'estado')
+        fields = ('id', 'nombre', 'ciudad', 'direccion', 'categoria',
+                  'descripcion', 'latitud', 'longitud', 'estado')
 
 class CreateEventoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Evento
-        fields = ('nombre', 'ciudad', 'direccion', 'categoria', 
+        fields = ('nombre', 'ciudad', 'direccion', 'categoria', 'descripcion',
                   'latitud', 'longitud', 'dia', 'mes', 'ano', 'horaInicio', 
                   'minutoInicio', 'duracion')
 
 class CreateEstablecimientoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Establecimiento
-        fields = ('nombre', 'ciudad', 'direccion', 'categoria', 'latitud', 'longitud')
+        fields = ('nombre', 'ciudad', 'direccion', 'categoria', 'descripcion', 'latitud', 'longitud')
 
 class UpdatePDISerializer(serializers.ModelSerializer):
     id = serializers.CharField(validators=[])
