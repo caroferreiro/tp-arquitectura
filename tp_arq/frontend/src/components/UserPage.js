@@ -1,18 +1,19 @@
 import React, { Component } from "react";
 import { Grid2 as Grid, Button, Typography, ButtonGroup } from "@mui/material";
-import { Link } from "react-router-dom";
+import CodigoAdminPage from "./CodigoAdminPage";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-export default class AgregarPDIPage extends Component {
+export default class UserPage extends Component {
   constructor(props) {
     super(props);
-    }
+  }
 
   renderCreateButtons() {
     return (
       <Grid container spacing={1} justifyContent="center">
         <Grid item xs={12} align="center">
           <Typography variant="h2" compact="h2">
-            Agregar un nuevo...
+            Ingresar como...
           </Typography>
         </Grid>  
         <Grid item xs={12} align="center"> 
@@ -23,15 +24,16 @@ export default class AgregarPDIPage extends Component {
               size="large"
               onClick={() => {}}
             >
-              Evento
+              Usuario
             </Button>
             <Button
               color="secondary"
               variant="contained"
               size="large"
-              onClick={() => {}}
+              component={Link}
+              to="/validar-administrador"
             >
-              Establecimiento
+              Administrador
             </Button>
           </ButtonGroup>
         </Grid>
@@ -41,9 +43,19 @@ export default class AgregarPDIPage extends Component {
 
   render() {
     return (
-      <div>
-        {this.renderCreateButtons()}
-      </div>
-    );
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div>
+                {this.renderCreateButtons()}
+              </div>
+            }
+          />
+          <Route path="/validar-administrador" element={<CodigoAdminPage />} />
+        </Routes>
+      </Router> 
+    ); 
   }
 }
