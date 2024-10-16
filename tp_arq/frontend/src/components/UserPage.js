@@ -46,22 +46,9 @@ export default class UserPage extends Component {
 
   render() {
     return (
-      <Router>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <div>
-                {this.renderCreateButtons()}
-              </div>
-            }
-          />
-          <Route path="/validar-administrador" element={<CodigoAdminPage />} />
-          <Route path="/agregarPDI" element={<AgregarPDIPage />} />
-          <Route path="/agregarEvento" element={<AgregarEventoPage />} />
-          <Route path="/agregarEstablecimiento" element={<AgregarEstablecimientoPage />} />
-        </Routes>
-      </Router> 
+      <div>
+        {this.renderCreateButtons()}
+      </div>
     ); 
   }
 }
