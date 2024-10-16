@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Grid2 as Grid, Button, Typography, ButtonGroup } from "@mui/material";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import AgregarEventoPage from "./AgregarEventoPage";
-import AgregarEstablecimientoPage from "./AgregarEstablecimientoPage";
 
 export default class AgregarPDIPage extends Component {
   constructor(props) {

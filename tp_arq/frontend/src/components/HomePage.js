@@ -1,13 +1,12 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import UserPage from "./UserPage";
 import CodigoAdminPage from "./CodigoAdminPage";
 import AgregarPDIPage from "./AgregarPDIPage";
 import AgregarEstablecimientoPage from "./AgregarEstablecimientoPage";
 import AgregarEventoPage from "./AgregarEventoPage";
 import RevisionPage from "./RevisionPage";
-import { Grid2 as Grid, Button, ButtonGroup, Typography } from "@mui/material";
-import { BrowserRouter as Router, Routes, Route, Link, Navigate } from "react-router-dom";
-// import Info from "./Info";
+
 
 export default class HomePage extends Component {
   constructor(props) {

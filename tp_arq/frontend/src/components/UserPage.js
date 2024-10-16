@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { Grid2 as Grid, Button, Typography, ButtonGroup } from "@mui/material";
-import CodigoAdminPage from "./CodigoAdminPage";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import AgregarPDIPage from "./AgregarPDIPage";
-import AgregarEventoPage from "./AgregarEventoPage";
-import AgregarEstablecimientoPage from "./AgregarEstablecimientoPage";
+import { Link } from "react-router-dom";
+
 
 export default class UserPage extends Component {
   constructor(props) {
@@ -26,6 +23,7 @@ export default class UserPage extends Component {
               variant="contained"
               size="large"
               onClick={() => {}}
+              to="/"
             >
               Usuario
             </Button>

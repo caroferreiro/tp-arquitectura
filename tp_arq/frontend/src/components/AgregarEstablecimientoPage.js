@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Grid2 as Grid, Button, Typography, TextField, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { Link } from "react-router-dom";
-import RevisionPage from "./RevisionPage";
+
 
 export default class AgregarEstablecimientoPage extends Component {
   constructor(props) {
