@@ -12,8 +12,8 @@ export default class AgregarEstablecimientoPage extends Component {
         direccion: "",
         categoria: "",
         descripcion: "",
-        latitud: 0.0,
-        longitud: 0.0,
+        latitud: "",
+        longitud: "",
       };
     this.handleCategoriaChange = this.handleCategoriaChange.bind(this);
     this.solicitarEstablecimientoButton = this.solicitarEstablecimientoButton.bind(this);
@@ -90,6 +90,7 @@ export default class AgregarEstablecimientoPage extends Component {
               name="latitud"
               label="Latitud"
               placeholder="Ingresa la latitud del establecimiento con decimales"
+              type="number"
               value={this.state.latitud}
               variant="outlined"
               onChange={(e) => this.setState({ latitud: e.target.value })}
@@ -100,6 +101,7 @@ export default class AgregarEstablecimientoPage extends Component {
               name="longitud"
               label="Longitud"
               placeholder="Ingresa la longitud del establecimiento con decimales"
+              type="number"
               value={this.state.longitud}
               variant="outlined"
               onChange={(e) => this.setState({ longitud: e.target.value })}
