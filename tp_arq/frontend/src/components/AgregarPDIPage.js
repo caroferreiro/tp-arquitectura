@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Grid2 as Grid, Button, Typography, ButtonGroup } from "@mui/material";
-import { BrowserRouter as Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class AgregarPDIPage extends Component {
   constructor(props) {

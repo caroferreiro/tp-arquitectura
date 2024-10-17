@@ -32,7 +32,7 @@ class PDI(models.Model):
     ciudad = models.CharField(max_length=50, null=False, unique=False)
     direccion = models.CharField(max_length=50, null=False, unique=False)
     categoria = models.CharField(max_length=15, choices=categorias)
-    descripcion = models.CharField(max_length=250, default='')
+    descripcion = models.CharField(max_length=2000, default='')
     latitud = models.FloatField(validators=[MinValueValidator(-90), MaxValueValidator(90)])
     longitud = models.FloatField(validators=[MinValueValidator(-180), MaxValueValidator(180)])
     estado = models.BooleanField(null=False, default=False)

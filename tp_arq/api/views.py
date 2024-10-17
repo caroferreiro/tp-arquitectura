@@ -78,7 +78,7 @@ class AgregarEstablecimiento(APIView):
                 longitud=serializer.data.get('longitud'),
             )
             return Response(EstablecimientoSerializer(nuevo_establecimiento).data, status=status.HTTP_201_CREATED)
-
+        print("Errores de validación:", serializer.errors)
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
 class AceptarPDI(APIView):

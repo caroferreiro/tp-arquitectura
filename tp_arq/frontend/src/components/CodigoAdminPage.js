@@ -71,7 +71,7 @@ export default function CodigoAdminPage() {
         </Button>
       </Grid>
       <Grid item xs={12} align="center">
-        <Button variant="contained" color="secondary" component={Link} to="/">
+        <Button variant="contained" color="secondary" component={Link} to="/ingresar">
           Atrás
         </Button>
       </Grid>
