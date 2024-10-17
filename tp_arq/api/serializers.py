@@ -1,5 +1,11 @@
 from rest_framework import serializers
-from .models import PDI, Evento, Establecimiento
+from .models import Administrador, PDI, Evento, Establecimiento
+
+
+class AdminSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Administrador
+        fields = ('mail',)
 
 class PDISerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,8 +17,7 @@ class EventoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Evento
         fields = ('id', 'nombre', 'ciudad', 'direccion', 'categoria', 
-                  'descripcion', 'latitud', 'longitud', 'estado', 'dia', 
-                  'mes', 'ano', 'horaInicio', 'minutoInicio', 'duracion')
+                  'descripcion', 'latitud', 'longitud', 'estado', 'fechaHora', 'duracion')
 
 class EstablecimientoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -24,8 +29,7 @@ class CreateEventoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Evento
         fields = ('nombre', 'ciudad', 'direccion', 'categoria', 'descripcion',
-                  'latitud', 'longitud', 'dia', 'mes', 'ano', 'horaInicio', 
-                  'minutoInicio', 'duracion')
+                  'latitud', 'longitud', 'fechaHora', 'duracion')
 
 class CreateEstablecimientoSerializer(serializers.ModelSerializer):
     class Meta:

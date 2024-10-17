@@ -1,16 +1,8 @@
-from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
 from django.db import models
 import random
 import string
-
-
-def validate_password_length(value):
-    if len(value) < 8:
-        raise ValidationError(
-            _("La contraseña debe tener al menos 8 caracteres.")
-        )
 
 def generate_unique_id():
     length = 8

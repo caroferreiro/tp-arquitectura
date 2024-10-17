@@ -1,13 +1,34 @@
 from django.shortcuts import render
 from rest_framework import generics, status
-from .serializers import PDISerializer, EventoSerializer, EstablecimientoSerializer, CreateEventoSerializer, CreateEstablecimientoSerializer, UpdatePDISerializer
-from .models import PDI, Usuario, Evento, Establecimiento
+from .serializers import AdminSerializer, PDISerializer, EventoSerializer, EstablecimientoSerializer, CreateEventoSerializer, CreateEstablecimientoSerializer, UpdatePDISerializer
+from .models import PDI, Administrador
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.http import JsonResponse
-from .gestor import GestorPDI
+from .gestorPDI import GestorPDI
+from .gestorAdmin import GestorAdmin
 
 gestor_puntos = GestorPDI()
+gestor_admin = GestorAdmin()
+
+class AgregarAdmin(APIView):
+    serializer_class = AdminSerializer
+    
+    def post(self, request, format=None):
+        serializer = self.serializer_class(data=request.data)
+
+        # Verificamos si el correo ya existe
+        mail = request.data.get('mail')
+        if gestor_admin.existeAdmin(mail):
+            # Si el administrador ya existe, retorna una respuesta exitosa
+            return Response({'message': 'Admin ya existe, acceso concedido.'}, status=status.HTTP_200_OK)
+
+        # Solo validamos el serializer si el admin no existe
+        if serializer.is_valid():
+            # Si el administrador no existe, crea uno nuevo
+            nuevo_admin = gestor_admin.agregarAdmin(mail=mail)
+            return Response(AdminSerializer(nuevo_admin).data, status=status.HTTP_201_CREATED)
+        
+        return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
 class PDIView(generics.ListAPIView):
     queryset = gestor_puntos.listarPDIs()
@@ -75,9 +96,6 @@ class AceptarPDI(APIView):
                 return Response({'msg': 'Punto de interés no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
 
             pdi = queryset.first()
-            user = Usuario.objects.filter(mail=usuario, es_admin=True).first()
-            if not user:
-                return Response({'msg': 'No es posible realizar esta acción.'}, status=status.HTTP_403_FORBIDDEN)
 
             pdi.estado = estado
             pdi.save(update_fields=['estado'])

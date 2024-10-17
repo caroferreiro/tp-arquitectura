@@ -17,6 +17,7 @@ export default class HomePage extends Component {
     return (
       <Router>
         <Routes>
+          <Route path="/" element={<HomePage />} />
           <Route path="/ingresar" element={<UserPage />} />
           <Route path="/validar-administrador" element={<CodigoAdminPage />} />
           <Route path="/agregarPDI" element={<AgregarPDIPage />} />
