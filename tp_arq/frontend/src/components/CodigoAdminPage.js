@@ -59,6 +59,7 @@ export default class CodigoAdminPage extends Component {
     if (code === "ABCD") {
       this.props.history.push("/agregarPDI");
       this.esAdmin = True
+      // crear una instancia de la clase Administrador 
     } else {
       this.setState({ error: "Código inválido" });
     }
