@@ -3,6 +3,7 @@ import { Grid2 as Grid, Button, Typography, TextField, FormControl, InputLabel, 
 import { Link } from "react-router-dom";
 
 
+
 export default class AgregarEventoPage extends Component {
   constructor(props) {
     super(props);
@@ -14,15 +15,11 @@ export default class AgregarEventoPage extends Component {
         descripcion: "",
         latitud: "",
         longitud: "",
-        dia: "",
-        mes: "",
-        ano: "",
-        horaInicio: "",
-        minutoInicio: "",
-        duracion: "",
+        fechaHora: "",
+        duracion: "00:00",
       };
     this.handleCategoriaChange = this.handleCategoriaChange.bind(this);
-    this.solicitarEstablecimientoButton = this.solicitarEstablecimientoButton.bind(this);
+    this.solicitarEventoButton = this.solicitarEventoButton.bind(this);
   }
 
   render() {
@@ -114,73 +111,43 @@ export default class AgregarEventoPage extends Component {
             />
         </Grid>
         <Grid container spacing={1} justifyContent="center">
-            <Grid item xs={4}>
-                <TextField
-                name="fecha"
-                label="Fecha"
-                type="date"
-                value={`${this.state.ano}-${this.state.mes}-${this.state.dia}`}
-                variant="outlined"
-                onChange={(e) => {
-                    const dateValue = e.target.value;
-                    const [year, month, day] = dateValue.split("-");
-                    this.setState({ dia: day, mes: month, ano: year });
-                }}
-                slotProps={{
-                    input: {},
-                    inputLabel: {
-                    shrink: true, // Esto asegura que la etiqueta se mantenga arriba
-                    },
-                }}
-                />
-            </Grid>
-        </Grid>
-        <Grid item xs={12} align="center">
-          <TextField
-              name="horaInicio"
-              label="Hora Inicio"
-              placeholder="Ingresa la hora de inicio del evento"
-              type="number"
-              value={this.state.horaInicio}
+          <Grid item xs={4}>
+            <TextField
+              name="fechaHora"
+              label="Fecha y Hora de Inicio"
+              type="datetime-local"
+              value={this.state.fechaHora}
               variant="outlined"
-              onChange={(e) => this.setState({ horaInicio: e.target.value })}
+              onChange={(e) => this.setState({ fechaHora: e.target.value })}  // Guardar fecha y hora en un solo campo
+              slotProps={{
+                inputLabel: {
+                  shrink: true,
+                },
+              }}
             />
+          </Grid>
         </Grid>
+
         <Grid item xs={12} align="center">
-          <TextField
-              name="minutoInicio"
-              label="Minuto Inicio"
-              placeholder="Ingresa el minuto de inicio del evento"
-              type="number"
-              value={this.state.minutoInicio}
-              variant="outlined"
-              onChange={(e) => this.setState({ minutoInicio: e.target.value })}
-            />
-        </Grid>
-        <Grid item xs={12} align="center">
-          <TextField
-              name="duracion"
-              label="Duración"
-              placeholder="Ingresa lla duración del evento"
-              type="number"
-              value={this.state.duracion}
-              variant="outlined"
-              onChange={(e) => this.setState({ duracion: e.target.value })}
-            />
-        </Grid>
+        <TextField
+          name="duracion"
+          label="Duración"
+          placeholder="hh:mm"
+          type="time"
+          value={this.state.duracion}
+          variant="outlined"
+          onChange={(e) => this.setState({ duracion: e.target.value })}
+          slotProps={{
+            inputLabel: {
+              shrink: true,
+              input : {step: 300},
+            },
+          }}
+        />
+      </Grid>
         <Grid item spacing={1} xs={12} align="center">
-          <Button variant="contained" color="primary" onClick={this.solicitarEstablecimientoButton}>
-            Solicitar nuevo establecimiento
-          </Button>
-        </Grid>  
-        <Grid item xs={12} align="center">  
-          <Button variant="contained" color="secondary" to="/" component={Link}>
-            Atrás
-          </Button>
-        </Grid>
-        <Grid item spacing={1} xs={12} align="center">
-          <Button variant="contained" color="primary" onClick={this.solicitarEstablecimientoButton}>
-            Solicitar nuevo establecimiento
+          <Button variant="contained" color="primary" onClick={this.solicitarEventoButton}>
+            Solicitar nuevo evento
           </Button>
         </Grid>  
         <Grid item xs={12} align="center">  
@@ -196,7 +163,15 @@ export default class AgregarEventoPage extends Component {
     this.setState({ categoria: event.target.value });
   };
 
-  solicitarEstablecimientoButton() {
+  solicitarEventoButton() {
+    // Parsear la fecha y hora
+    const [date, time] = this.state.fechaHora.split("T");
+    const [year, month, day] = date.split("-");
+    const [hours, minutes] = time.split(":");
+  
+    // Parsear la duración (hh:mm)
+    const [duracionHoras, duracionMinutos] = this.state.duracion.split(":");
+  
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -208,24 +183,26 @@ export default class AgregarEventoPage extends Component {
         descripcion: this.state.descripcion,
         latitud: this.state.latitud,
         longitud: this.state.longitud,
+        fechaHora: `${year}-${month}-${day}T${hours}:${minutes}:00`,  // Formato ISO para fecha y hora
+        duracion: `PT${duracionHoras}H${duracionMinutos}M`,  // Formato ISO 8601 para la duración
       }),
     };
+  
     console.log("Datos a enviar:", requestOptions); // Imprime los datos
-
+  
     fetch("/api/agregar-establecimiento", requestOptions)
       .then((response) => {
         if (response.ok) {
-          console.log("Establecimiento agregado correctamente");
+          console.log("Evento agregado con exito");
         } else {
-          // Muestra el código de error y el mensaje
           console.log(`Error: ${response.status} - ${response.statusText}`);
           return response.json().then((data) => {
-          console.log("Detalles del error:", data);
+            console.log("Detalles del error:", data);
           });
         }
       })
       .catch((error) => {
         console.log("Error de red o de servidor:", error);
       });
-  }  
+  }
 }

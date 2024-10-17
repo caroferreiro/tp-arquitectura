@@ -144,7 +144,7 @@ export default class AgregarEstablecimientoPage extends Component {
     fetch("/api/agregar-establecimiento", requestOptions)
       .then((response) => {
         if (response.ok) {
-          console.log("Establecimiento agregado correctamente");
+          this.props.history.push(`/revision`);
         } else {
           // Muestra el código de error y el mensaje
           console.log(`Error: ${response.status} - ${response.statusText}`);
