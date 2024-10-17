@@ -23,15 +23,8 @@ def generate_unique_id():
     return id
 
 # Create your models here.
-class Usuario(models.Model):
-    nombre = models.CharField(max_length=50, default='', unique=False)
-    mail = models.CharField(max_length=50, default='', unique=True)
-    contraseña = models.CharField(max_length=20, null=False, validators=[validate_password_length])
-    es_admin = models.BooleanField(null=False, default=False)
-
-    def evaluarPDI(self, sugerencia):
-        if self.es_admin:
-            pass
+class Administrador(models.Model):
+    mail = models.EmailField(max_length=50, unique=True, default='')
 
 class PDI(models.Model):
     categorias = [
@@ -53,12 +46,8 @@ class PDI(models.Model):
     estado = models.BooleanField(null=False, default=False)
 
 class Evento(PDI):
-    dia = models.IntegerField(null=False, validators=[MinValueValidator(1), MaxValueValidator(31)])
-    mes = models.IntegerField(null=False, validators=[MinValueValidator(1), MaxValueValidator(12)])
-    ano = models.IntegerField(null=False, validators=[MinValueValidator(1900), MaxValueValidator(2100)])
-    horaInicio = models.IntegerField(null=False)
-    minutoInicio = models.IntegerField(null=False)
-    duracion = models.IntegerField(null=False)
+    fechaHora = models.DateTimeField(null=False)  # Unifica dia, mes, ano, horaInicio y minutoInicio
+    duracion = models.DurationField(null=False)
     # fecha = models.DateField()
     # horaInicio = models.TimeField()
     # horaFin = models.TimeField()
