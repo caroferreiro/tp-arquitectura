@@ -50,7 +50,7 @@ export default function AgregarEventoPage() {
       .then((response) => {
         if (response.ok) {
           console.log("Evento agregado con éxito");
-          navigate("/"); // Navega a la página de inicio después de agregar el evento
+          navigate("/revision");
         } else {
           console.log(`Error: ${response.status} - ${response.statusText}`);
           return response.json().then((data) => {
