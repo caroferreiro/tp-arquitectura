@@ -10,6 +10,7 @@ export default function AgregarEstablecimientoPage() {
   const [descripcion, setDescripcion] = useState("");
   const [latitud, setLatitud] = useState("");
   const [longitud, setLongitud] = useState("");
+  const [error, setError] = useState(null);
   
   const navigate = useNavigate(); // Hook useNavigate para la navegación
 
@@ -37,16 +38,20 @@ export default function AgregarEstablecimientoPage() {
       .then((response) => {
         if (response.ok) {
           navigate(`/revision`); // Usar useNavigate para la navegación
+        } else if (response.status === 409) {
+          setError("El establecimiento ya existe.");
         } else {
           // Muestra el código de error y el mensaje
           console.log(`Error: ${response.status} - ${response.statusText}`);
           return response.json().then((data) => {
+            setError("Ocurrió un error al agregar el establecimiento.");
             console.log("Detalles del error:", data);
           });
         }
       })
       .catch((error) => {
         console.log("Error de red o de servidor:", error);
+        setError("Error de red o servidor. Inténtalo nuevamente.");
       });
   };
 
@@ -136,6 +141,9 @@ export default function AgregarEstablecimientoPage() {
           variant="outlined"
           onChange={(e) => setLongitud(e.target.value)}
         />
+      </Grid>
+      <Grid item xs={12} align="center">
+        {error && <Typography color="error">{error}</Typography>}
       </Grid>
       <Grid item spacing={1} xs={12} align="center">
         <Button variant="contained" color="primary" onClick={solicitarEstablecimientoButton}>

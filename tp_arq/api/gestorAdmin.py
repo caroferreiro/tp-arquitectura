@@ -1,5 +1,5 @@
 from .models import Administrador
-from django.core.exceptions import ValidationError
+
 
 class GestorAdmin:
 

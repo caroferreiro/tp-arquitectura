@@ -12,6 +12,7 @@ export default function AgregarEventoPage() {
   const [longitud, setLongitud] = useState("");
   const [fechaHora, setFechaHora] = useState("");
   const [duracion, setDuracion] = useState("00:00");
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate(); // Inicializa useNavigate
 
@@ -51,15 +52,19 @@ export default function AgregarEventoPage() {
         if (response.ok) {
           console.log("Evento agregado con éxito");
           navigate("/revision");
+        } else if (response.status === 409) {
+          setError("El evento ya existe.");
         } else {
           console.log(`Error: ${response.status} - ${response.statusText}`);
           return response.json().then((data) => {
             console.log("Detalles del error:", data);
+            setError("Ocurrió un error al agregar el evento.");
           });
         }
       })
       .catch((error) => {
         console.log("Error de red o de servidor:", error);
+        setError("Error de red o servidor. Inténtalo nuevamente.");
       });
   };
 
@@ -183,6 +188,9 @@ export default function AgregarEventoPage() {
             },
           }}
         />
+      </Grid>
+      <Grid item xs={12} align="center">
+        {error && <Typography color="error">{error}</Typography>}
       </Grid>
       <Grid item spacing={1} xs={12} align="center">
         <Button variant="contained" color="primary" onClick={solicitarEventoButton}>

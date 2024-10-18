@@ -6,6 +6,7 @@ import AgregarPDIPage from "./AgregarPDIPage";
 import AgregarEstablecimientoPage from "./AgregarEstablecimientoPage";
 import AgregarEventoPage from "./AgregarEventoPage";
 import RevisionPage from "./RevisionPage";
+import EvaluarPDIsPage from "./EvaluarPDIsPage";
 
 
 export default class HomePage extends Component {
@@ -24,6 +25,7 @@ export default class HomePage extends Component {
           <Route path="/agregarEvento" element={<AgregarEventoPage />} />
           <Route path="/agregarEstablecimiento" element={<AgregarEstablecimientoPage />} />
           <Route path="/revision" element={<RevisionPage />} />
+          <Route path="/listar-pendientes" element={<EvaluarPDIsPage />} />
         </Routes>
       </Router>
     );

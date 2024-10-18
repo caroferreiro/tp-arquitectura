@@ -41,4 +41,4 @@ class UpdatePDISerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PDI
-        fields = ('id', 'usuario', 'estado')
+        fields = ('id',)

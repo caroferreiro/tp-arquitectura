@@ -19,8 +19,9 @@ export default function CodigoAdminPage() {
       fetch("/api/agregar-admin", requestOptions)
         .then((response) => {
           if (response.ok) {
-            navigate(`/`);
-            console.log("Admin agregado con éxito")
+            navigate(`/`)
+            console.log("Detalles del error:", data);
+            console.error("Error en la solicitud:", error.message);
           } else {
             return response.json().then((data) => {
               console.log("Detalles del error:", data);

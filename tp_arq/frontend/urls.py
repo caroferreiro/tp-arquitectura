@@ -10,6 +10,7 @@ urlpatterns = [
     path('agregarEstablecimiento', index),
     path('revision', index),
     path('mapa', index),
+    path('listar-pendientes', index),
     # path('create', index),
     # path('room/<str:roomCode>', index)
 ]
