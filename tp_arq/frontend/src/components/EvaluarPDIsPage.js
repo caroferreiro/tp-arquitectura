@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function ListaPDIsPage() {
   const [pdis, setPdis] = useState([]);
   const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   useEffect(() => {
     fetchPDIs();
@@ -41,6 +42,8 @@ export default function ListaPDIsPage() {
       .then((response) => {
         if (response.ok) {
             console.log(`${response.status} - ${response.statusText}`);
+            setSuccessMessage("Punto de interés aprobado con éxito");  // Mensaje de éxito
+            fetchPDIs();  // Refrescar la lista después de la operación
         } else {
           console.log(`Error: ${response.status} - ${response.statusText}`);
           return response.json().then((data) => {
@@ -68,6 +71,8 @@ export default function ListaPDIsPage() {
       .then((response) => {
         if (response.ok) {
             console.log(`${response.status} - ${response.statusText}`);
+            setSuccessMessage("Punto de interés rechazado con éxito");  // Mensaje de éxito
+            fetchPDIs();  // Refrescar la lista después de la operación
         } else {
           console.log(`Error: ${response.status} - ${response.statusText}`);
           return response.json().then((data) => {
@@ -91,7 +96,12 @@ export default function ListaPDIsPage() {
       </Grid>
       {error && (
         <Grid item xs={12} align="center">
-          <Typography color="error">{error}</Typography> {/* Mostrar error si existe */}
+          <Typography color="error">{error}</Typography>
+        </Grid>
+      )}
+      {successMessage && (
+        <Grid item xs={12} align="center">
+          <Typography color="primary">{successMessage}</Typography>
         </Grid>
       )}
      <Grid item xs={12} align="center">
@@ -122,7 +132,7 @@ export default function ListaPDIsPage() {
         </Button>
       </Grid>
       <Grid item xs={12} align="center">
-        <Button variant="contained" color="secondary" to="/" onClick={Link}>
+        <Button variant="contained" color="secondary" to="/" component={Link}>
           Ir al inicio
         </Button>
       </Grid>
