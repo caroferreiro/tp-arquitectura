@@ -9,7 +9,7 @@ export default class AgregarPDIPage extends Component {
 
   renderCreateButtons() {
     return (
-      <Grid container spacing={1} justifyContent="center">
+      <Grid container spacing={2} direction="column" justifyContent="center">
         <Grid item xs={12} align="center">
           <Typography variant="h2" compact="h2">
             Agregar un nuevo...
