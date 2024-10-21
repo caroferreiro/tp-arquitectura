@@ -6,7 +6,7 @@ export default function CodigoAdminPage() {
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
   const [mail, setMail] = useState("");
-  const navigate = useNavigate(); // Usar el hook useNavigate para navegación
+  const navigate = useNavigate(); 
 
   const adminButtonPressed = () => {
     const requestOptions = {
@@ -46,11 +46,9 @@ export default function CodigoAdminPage() {
       </Grid>
       <Grid item xs={12} align="center">
         <TextField
-          error={!!error}
           label="Mail"
           placeholder="Ingresá tu mail"
           value={mail}
-          helperText={error}
           variant="outlined"
           onChange={(e) => setMail(e.target.value)}
         />
