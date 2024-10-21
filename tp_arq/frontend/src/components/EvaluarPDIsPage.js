@@ -14,7 +14,7 @@ export default function ListaPDIsPage() {
   }, []);
 
   const fetchPDIs = () => {
-    fetch("/api/traer-pdis?estado=false")
+    fetch("/api/traer-pdis?estado=False")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
@@ -132,8 +132,8 @@ export default function ListaPDIsPage() {
         </Button>
       </Grid>
       <Grid item xs={12} align="center">
-        <Button variant="contained" color="secondary" to="/" component={Link}>
-          Ir al inicio
+        <Button variant="outlined" color="secondary" to="/mapa-admin" component={Link}>
+          Volver al inicio
         </Button>
       </Grid>
     </Grid>

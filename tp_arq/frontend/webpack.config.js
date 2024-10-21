@@ -10,6 +10,17 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: [
+          {
+            loader: 'file-loader', // O puedes usar url-loader
+            options: {
+              name: '[path][name].[ext]', // Mantener la estructura del archivo original
+            },
+          },
+        ],
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
@@ -20,6 +31,7 @@ module.exports = {
         test: /\.css$/,  
         use: ["style-loader", "css-loader"],  
       },
+      
     ],
   },
   optimization: {

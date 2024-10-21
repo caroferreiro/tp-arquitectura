@@ -19,7 +19,7 @@ export default function CodigoAdminPage() {
       fetch("/api/agregar-admin", requestOptions)
         .then((response) => {
           if (response.ok) {
-            navigate(`/`)
+            navigate(`/mapa-admin`)
             console.log("Detalles del error:", data);
             console.error("Error en la solicitud:", error.message);
           } else {
@@ -72,7 +72,7 @@ export default function CodigoAdminPage() {
         </Button>
       </Grid>
       <Grid item xs={12} align="center">
-        <Button variant="contained" color="secondary" component={Link} to="/ingresar">
+        <Button variant="outlined" color="secondary" component={Link} to="/">
           Atrás
         </Button>
       </Grid>

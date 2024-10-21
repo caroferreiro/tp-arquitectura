@@ -16,7 +16,7 @@ export default class CodigoAdminPage extends Component {
           </Typography>
         </Grid>  
         <Grid item xs={12} align="center">  
-          <Button variant="contained" color="secondary" component={Link} to="/">
+          <Button variant="outlined" color="secondary" component={Link} to="/mapa-usuario">
             Volver al inicio
           </Button>
         </Grid>

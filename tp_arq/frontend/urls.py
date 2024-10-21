@@ -3,13 +3,13 @@ from .views import index
 
 urlpatterns = [
     path('', index),
-    path('ingresar', index),
+    path('mapa-usuario', index),
+    path('mapa-admin', index),
     path('validar-administrador', index),
     path('agregarPDI', index),
     path('agregarEvento', index),
     path('agregarEstablecimiento', index),
     path('revision', index),
-    path('mapa', index),
     path('listar-pendientes', index),
     # path('create', index),
     # path('room/<str:roomCode>', index)

@@ -41,5 +41,5 @@ class GestorPDI:
 
     def listarPDIs(self, estado=None):
         if estado:
-            return PDI.objects.filter(estado=False)
+            return PDI.objects.filter(estado=estado)
         return PDI.objects.all()

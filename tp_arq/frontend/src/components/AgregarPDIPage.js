@@ -37,6 +37,11 @@ export default class AgregarPDIPage extends Component {
             </Button>
           </ButtonGroup>
         </Grid>
+        <Grid item xs={12} align="center">  
+          <Button variant="outlined" color="secondary" component={Link} to="/mapa-usuario">
+            Volver al inicio
+          </Button>
+        </Grid>
       </Grid>
     );
   }

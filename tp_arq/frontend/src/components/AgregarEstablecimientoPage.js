@@ -151,7 +151,7 @@ export default function AgregarEstablecimientoPage() {
         </Button>
       </Grid>
       <Grid item xs={12} align="center">
-        <Button variant="contained" color="secondary" to="/agregarPDI" component={Link}>
+        <Button variant="outlined" color="secondary" to="/agregarPDI" component={Link}>
           Atrás
         </Button>
       </Grid>

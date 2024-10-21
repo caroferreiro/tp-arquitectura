@@ -1,8 +1,9 @@
 import React from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css"; 
+import UserMarkers from "./UserMarkers";
 
-const MapView = () => {
+const MapViewUser = () => {
     return (
         <MapContainer 
             center={[ -38.95231561788808, -68.05600596781214]} 
@@ -15,8 +16,9 @@ const MapView = () => {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
+            <UserMarkers />
         </MapContainer>
     );
 };
 
-export default MapView;
+export default MapViewUser;

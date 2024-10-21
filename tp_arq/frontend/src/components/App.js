@@ -1,12 +1,12 @@
 // App.js
 import React, { Component } from "react";
-import HomePage from "./HomePage";
+import UserPage from "./UserPage";
 
 class App extends Component {
   render() {
     return (
       <div className="center">
-        <HomePage />
+        <UserPage />
       </div>
     );
   }
