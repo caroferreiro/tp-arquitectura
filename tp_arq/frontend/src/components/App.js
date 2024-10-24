@@ -5,8 +5,10 @@ import UserPage from "./UserPage";
 class App extends Component {
   render() {
     return (
-      <div className="center">
-        <UserPage />
+      <div className="background-container">
+        <div className="center">
+          <UserPage />
+        </div>
       </div>
     );
   }
