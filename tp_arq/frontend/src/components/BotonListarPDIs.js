@@ -15,7 +15,7 @@ const BotonListarPDIs = () => {
         width: "120px",
         height: "60px",
         borderRadius: "10px",
-        backgroundColor: "#007bff",
+        backgroundColor: "#f39c12",
         color: "white",
         fontSize: "14px",
         fontFamily: "'Roboto', sans-serif",
@@ -30,7 +30,7 @@ const BotonListarPDIs = () => {
 
     const buttonHoverStyle = {
         ...buttonStyle,
-        backgroundColor: "#0056b3",
+        backgroundColor: "#d68910",
     };
 
     const [hover, setHover] = React.useState(false);

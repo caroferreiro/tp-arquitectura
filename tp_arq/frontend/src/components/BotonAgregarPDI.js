@@ -15,7 +15,7 @@ const BotonAgregarPDI = () => {
         width: "60px",
         height: "60px",
         borderRadius: "50%",
-        backgroundColor: "#007bff",
+        backgroundColor: "#f39c12",
         color: "white",
         fontSize: "36px",
         border: "none",
@@ -29,7 +29,7 @@ const BotonAgregarPDI = () => {
 
     const buttonHoverStyle = {
         ...buttonStyle,
-        backgroundColor: "#0056b3",
+        backgroundColor: "#d68910",
     };
 
     const [hover, setHover] = React.useState(false);

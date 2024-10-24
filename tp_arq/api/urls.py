@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import AgregarAdmin, PDIView, AgregarEvento, AgregarEstablecimiento, AceptarPDI, RechazarPDI, TraerPDIs
+from .views import AgregarAdmin, PDIView, AgregarEvento, AgregarEstablecimiento, AceptarPDI, RechazarPDI, TraerPDIs, BuscarPDI
 
 urlpatterns = [
     path('pdi', PDIView.as_view()),
@@ -9,4 +9,5 @@ urlpatterns = [
     path('aceptar-pdi', AceptarPDI.as_view()),
     path('rechazar-pdi', RechazarPDI.as_view()),
     path('traer-pdis', TraerPDIs.as_view()),
+    path('buscar-pdi', BuscarPDI.as_view()),
 ]

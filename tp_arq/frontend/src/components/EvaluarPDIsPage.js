@@ -110,7 +110,7 @@ export default function ListaPDIsPage() {
             {pdis.map((pdi) => (
               <ListItem key={pdi.id} divider>
                 <Box sx={{ flexGrow: 1 }}>
-                  <Typography variant="h5" color="primary" component="div">
+                  <Typography variant="h5" color="black" component="div">
                     <strong>{pdi.nombre}</strong>
                   </Typography>
                   <Typography variant="body1">
@@ -127,10 +127,10 @@ export default function ListaPDIsPage() {
                   </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                  <IconButton color="primary" onClick={() => handleAceptar(pdi.id)} sx={{ mb: 1 }} size="large">
+                  <IconButton onClick={() => handleAceptar(pdi.id)} sx={{ mb: 1, color: "#27ae60"}} size="large">
                     <CheckIcon fontSize="inherit" />
                   </IconButton>
-                  <IconButton color="secondary" onClick={() => handleRechazar(pdi.id)} size="large">
+                  <IconButton onClick={() => handleRechazar(pdi.id)} sx={{ mb: 1, color: "#e74c3c"}} size="large">
                     <CloseIcon fontSize="inherit" />
                   </IconButton>
                 </Box>

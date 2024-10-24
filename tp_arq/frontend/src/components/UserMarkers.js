@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Marker, Popup } from "react-leaflet";
+import { Link } from "react-router-dom";
 import L from "leaflet"; // Importa Leaflet directamente
 import "leaflet/dist/leaflet.css"; // Importa el CSS de Leaflet
 import blueMarker from "./icons/blue_marker.png"; 
@@ -41,6 +42,10 @@ const UserMarkers = () => {
         <Marker key={PDI.id} position={[PDI.latitud, PDI.longitud]} icon={customIcon}>
           <Popup>
             <strong>{PDI.nombre}</strong>
+            <br />
+            <Link to={`/pdi/${PDI.id}`} style={{ textDecoration: 'underline', color: 'primary' }}>
+              Ver info
+            </Link>
           </Popup>
         </Marker>
       ))}

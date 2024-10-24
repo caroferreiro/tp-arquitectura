@@ -11,6 +11,5 @@ urlpatterns = [
     path('agregarEstablecimiento', index),
     path('revision', index),
     path('listar-pendientes', index),
-    # path('create', index),
-    # path('room/<str:roomCode>', index)
+    path('pdi/<str:id>', index)
 ]

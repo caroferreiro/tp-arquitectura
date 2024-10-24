@@ -14,7 +14,7 @@ export default class AgregarPDIPage extends Component {
           <Typography
           variant="h3"
           compact="h3"
-          sx={{ marginBottom: 6 }} // Ajusta el valor según necesites
+          sx={{ marginBottom: 6 }} 
         >
           Agregar un nuevo...
         </Typography>

@@ -36,8 +36,8 @@ class GestorPDI:
         except PDI.DoesNotExist:
             return False
 
-    def buscar_PDI(self, nombre):
-        return PDI.objects.filter(nombre__icontains=nombre)
+    def buscar_PDI(self, id):
+        return PDI.objects.get(id=id)
 
     def listarPDIs(self, estado=None):
         if estado:

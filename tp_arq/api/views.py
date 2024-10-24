@@ -131,3 +131,14 @@ class TraerPDIs(APIView):
         serializer = self.serializer_class(pdilist, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+class BuscarPDI(APIView):
+    serializer_class = PDISerializer
+
+    def get(self, request, format=None):
+        id = request.query_params.get('id')
+        pdi = gestor_puntos.buscar_PDI(id=id)
+
+        serializer = self.serializer_class(pdi, many=False)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)

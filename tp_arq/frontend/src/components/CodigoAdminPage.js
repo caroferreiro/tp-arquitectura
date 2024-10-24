@@ -38,12 +38,13 @@ export default function CodigoAdminPage() {
   };
 
   return (
-    <Grid container spacing={2} direction="column" justifyContent="center">
+    <Grid container spacing={1} direction="column" justifyContent="center">
       <Grid item xs={12} align="center">
       <Typography
         variant="h3"
         compact="h3"
-        sx={{ marginBottom: 6 }} // Ajusta el valor según necesites
+        className="passion-one-black"
+        sx={{ marginBottom: 6, fontWeight: 900 }} 
       >
         Ingresá tu mail y el código para validarte como administrador
       </Typography>
@@ -66,6 +67,7 @@ export default function CodigoAdminPage() {
           helperText={error}
           variant="outlined"
           onChange={(e) => setCode(e.target.value)}
+          sx={{ marginBottom: 3 }}
         />
       </Grid>
       <Grid item xs={12} align="center">
