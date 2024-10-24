@@ -17,7 +17,7 @@ const BotonListarPDIs = () => {
         borderRadius: "10px",
         backgroundColor: "#007bff",
         color: "white",
-        fontSize: "12px",
+        fontSize: "14px",
         fontFamily: "'Roboto', sans-serif",
         border: "none",
         display: "flex",

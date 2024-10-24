@@ -40,9 +40,13 @@ export default function CodigoAdminPage() {
   return (
     <Grid container spacing={2} direction="column" justifyContent="center">
       <Grid item xs={12} align="center">
-        <Typography variant="h3" compact="h3">
-          Ingresa tu mail y el código para validarte como administrador
-        </Typography>
+      <Typography
+        variant="h3"
+        compact="h3"
+        sx={{ marginBottom: 6 }} // Ajusta el valor según necesites
+      >
+        Ingresá tu mail y el código para validarte como administrador
+      </Typography>
       </Grid>
       <Grid item xs={12} align="center">
         <TextField

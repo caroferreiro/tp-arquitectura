@@ -5,7 +5,7 @@ const BotonAgregarPDI = () => {
     const navigate = useNavigate(); // Hook para redirección
 
     const handleButtonClick = () => {
-        navigate("/agregar-pdi"); // Ruta de la página para agregar un PDI
+        navigate("/agregarPDI"); // Ruta de la página para agregar un PDI
     };
 
     const buttonStyle = {

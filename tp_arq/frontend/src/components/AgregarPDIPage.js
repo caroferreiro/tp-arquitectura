@@ -11,9 +11,13 @@ export default class AgregarPDIPage extends Component {
     return (
       <Grid container spacing={2} direction="column" justifyContent="center">
         <Grid item xs={12} align="center">
-          <Typography variant="h2" compact="h2">
-            Agregar un nuevo...
-          </Typography>
+          <Typography
+          variant="h3"
+          compact="h3"
+          sx={{ marginBottom: 6 }} // Ajusta el valor según necesites
+        >
+          Agregar un nuevo...
+        </Typography>
         </Grid>  
         <Grid item xs={12} align="center"> 
           <ButtonGroup disableElevation variant="contained" sx={{ gap: 2 }}>

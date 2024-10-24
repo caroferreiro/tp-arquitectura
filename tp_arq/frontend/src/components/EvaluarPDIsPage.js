@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Grid2 as Grid, Typography, List, ListItem, ListItemText, Button, IconButton } from "@mui/material";
+import { Grid2 as Grid, Typography, List, ListItem, ListItemText, Button, IconButton, Box } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function ListaPDIsPage() {
   const [pdis, setPdis] = useState([]);
@@ -91,7 +91,7 @@ export default function ListaPDIsPage() {
     <Grid container spacing={2} direction="column" justifyContent="center">
       <Grid item xs={12} align="center">
         <Typography variant="h4" component="h4">
-          Puntos de Interés Pendientes de Revisión
+          Puntos de Interés pendientes de revisión
         </Typography>
       </Grid>
       {error && (
@@ -109,18 +109,31 @@ export default function ListaPDIsPage() {
           <List>
             {pdis.map((pdi) => (
               <ListItem key={pdi.id} divider>
-                <ListItemText
-                  primary={pdi.nombre}
-                  secondary={`Ciudad: ${pdi.ciudad}, Dirección: ${pdi.direccion}, Categoría: ${pdi.categoria}, Descripción: ${pdi.descripcion}`}
-                />
-                {/* Botón de aceptar (tick) */}
-                <IconButton color="primary" onClick={() => handleAceptar(pdi.id)}>
-                  <CheckIcon />
-                </IconButton>
-                {/* Botón de rechazar (cruz) */}
-                <IconButton color="secondary" onClick={() => handleRechazar(pdi.id)}>
-                  <CloseIcon />
-                </IconButton>
+                <Box sx={{ flexGrow: 1 }}>
+                  <Typography variant="h5" color="primary" component="div">
+                    <strong>{pdi.nombre}</strong>
+                  </Typography>
+                  <Typography variant="body1">
+                    <strong>Ciudad:</strong> {pdi.ciudad}
+                  </Typography>
+                  <Typography variant="body1">
+                    <strong>Dirección:</strong> {pdi.direccion}
+                  </Typography>
+                  <Typography variant="body1">
+                    <strong>Categoría:</strong> {pdi.categoria}
+                  </Typography>
+                  <Typography variant="body1">
+                    <strong>Descripción:</strong> {pdi.descripcion}
+                  </Typography>
+                </Box>
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                  <IconButton color="primary" onClick={() => handleAceptar(pdi.id)} sx={{ mb: 1 }} size="large">
+                    <CheckIcon fontSize="inherit" />
+                  </IconButton>
+                  <IconButton color="secondary" onClick={() => handleRechazar(pdi.id)} size="large">
+                    <CloseIcon fontSize="inherit" />
+                  </IconButton>
+                </Box>
               </ListItem>
             ))}
           </List>

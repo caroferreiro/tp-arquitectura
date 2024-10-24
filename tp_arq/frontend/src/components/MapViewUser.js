@@ -1,17 +1,10 @@
 import React from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css"; 
-import { useNavigate } from "react-router-dom"; // Para redirigir al usuario
 import UserMarkers from "./UserMarkers";
 import BotonAgregarPDI from "./BotonAgregarPDI";
 
 const MapViewUser = () => {
-    const navigate = useNavigate(); // Hook para redirección
-
-    const handleButtonClick = () => {
-        navigate("/agregarPDI"); // Ruta de la página para agregar un PDI
-    };
-
     return (
         <div>
             <MapContainer 

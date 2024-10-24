@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Grid2 as Grid, Button, Typography, ButtonGroup } from "@mui/material";
-import { BrowserRouter as Router, Routes, Route, Link  } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import MapViewUser from "./MapViewUser"; 
 import MapViewAdmin from "./MapViewAdmin"; 
 import CodigoAdminPage from "./CodigoAdminPage";
@@ -10,7 +10,6 @@ import AgregarEventoPage from "./AgregarEventoPage";
 import RevisionPage from "./RevisionPage";
 import EvaluarPDIsPage from "./EvaluarPDIsPage";
 
-
 export default class UserPage extends Component {
   constructor(props) {
     super(props);
@@ -18,14 +17,19 @@ export default class UserPage extends Component {
 
   renderCreateButtons() {
     return (
-      <Grid container spacing={2} direction="column" justifyContent="center">
+      <Grid container spacing={15} direction="column" justifyContent="center">
         <Grid item xs={12} align="center">
-          <Typography variant="h2" compact="h2">
-            Ingresar como...
+        <Typography
+            variant="h1" 
+            className="passion-one-black" 
+            align="center"
+            sx={{ fontWeight: 900,  fontSize: '8rem' }}
+          >
+            #DescubríNQN
           </Typography>
-        </Grid>  
-        <Grid item xs={12} align="center"> 
-          <ButtonGroup disableElevation variant="contained" sx={{ gap: 2 }}>
+        </Grid> 
+        <Grid item xs={12} direction="column" align="center"> 
+          <ButtonGroup disableElevation variant="contained" orientation="vertical" sx={{ gap: 1 }}>
             <Button
               color="primary"
               variant="contained"
@@ -33,7 +37,7 @@ export default class UserPage extends Component {
               component={Link}
               to="/mapa-usuario"
             >
-              Usuario
+              Soy usuario
             </Button>
             <Button
               color="secondary"
@@ -42,7 +46,7 @@ export default class UserPage extends Component {
               component={Link}
               to="/validar-administrador"
             >
-              Administrador
+              Soy administrador
             </Button>
           </ButtonGroup>
         </Grid>
