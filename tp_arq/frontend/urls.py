@@ -11,5 +11,6 @@ urlpatterns = [
     path('agregarEstablecimiento', index),
     path('revision', index),
     path('listar-pendientes', index),
+    path('seleccionar-punto', index),
     path('pdi/<str:id>', index)
 ]

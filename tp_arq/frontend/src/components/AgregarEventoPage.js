@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Grid2 as Grid, Button, Typography, TextField, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
+import SeleccionarPunto from "./SeleccionarPunto";
 
 export default function AgregarEventoPage() {
   const [nombre, setNombre] = useState("");
@@ -11,7 +12,8 @@ export default function AgregarEventoPage() {
   const [latitud, setLatitud] = useState("");
   const [longitud, setLongitud] = useState("");
   const [fechaHora, setFechaHora] = useState("");
-  const [duracion, setDuracion] = useState("00:00");
+  const [duracion, setDuracion] = useState("");
+  const [mostrarMapa, setMostrarMapa] = useState(false);
   const [error, setError] = useState(null);
 
   const navigate = useNavigate(); // Inicializa useNavigate
@@ -47,7 +49,7 @@ export default function AgregarEventoPage() {
 
     console.log("Datos a enviar:", requestOptions); // Imprime los datos
 
-    fetch("/api/agregar-establecimiento", requestOptions)
+    fetch("/api/agregar-evento", requestOptions)
       .then((response) => {
         if (response.ok) {
           console.log("Evento agregado con éxito");
@@ -69,139 +71,127 @@ export default function AgregarEventoPage() {
   };
 
   return (
-    <Grid container spacing={1} direction="column" justifyContent="center">
-      <Grid item xs={12} align="center">
-        <Typography variant="h4" component="h4">
-          Agregar nuevo evento
-        </Typography>
-      </Grid>
-      <Grid item xs={12} align="center">
-        <TextField
-          name="nombre"
-          label="Nombre"
-          placeholder="Ingresa el nombre del evento"
-          value={nombre}
-          variant="outlined"
-          onChange={(e) => setNombre(e.target.value)}
-        />
-      </Grid>
-      <Grid item xs={12} align="center">
-        <TextField
-          name="ciudad"
-          label="Ciudad"
-          placeholder="Ingresa la ciudad del evento"
-          value={ciudad}
-          variant="outlined"
-          onChange={(e) => setCiudad(e.target.value)}
-        />
-      </Grid>
-      <Grid item xs={12} align="center">
-        <TextField
-          name="direccion"
-          label="Dirección"
-          placeholder="Ingresa la dirección del evento"
-          value={direccion}
-          variant="outlined"
-          onChange={(e) => setDireccion(e.target.value)}
-        />
-      </Grid>
-      <Grid item xs={12} align="center">
-        <FormControl fullWidth variant="outlined">
-          <InputLabel id="categoria-label">Categoría</InputLabel>
-          <Select
-            labelId="categoria-label"
-            value={categoria}
-            onChange={handleCategoriaChange}
-            label="Categoría"
-          >
-            <MenuItem value="G">Gastronomía</MenuItem>
-            <MenuItem value="E">Entretenimiento</MenuItem>
-            <MenuItem value="AL">Aire libre</MenuItem>
-            <MenuItem value="M">Música</MenuItem>
-            <MenuItem value="C">Cine</MenuItem>
-            <MenuItem value="A">Artesanías</MenuItem>
-          </Select>
-        </FormControl>
-      </Grid>
-      <Grid item xs={12} align="center">
-        <TextField
-          name="descripcion"
-          label="Descripción"
-          placeholder="Ingresa una descripción del evento"
-          value={descripcion}
-          variant="outlined"
-          onChange={(e) => setDescripcion(e.target.value)}
-        />
-      </Grid>
-      <Grid item xs={12} align="center">
-        <TextField
-          name="latitud"
-          label="Latitud"
-          type="number"
-          placeholder="Ingresa la latitud del evento con decimales"
-          value={latitud}
-          variant="outlined"
-          onChange={(e) => setLatitud(e.target.value)}
-        />
-      </Grid>
-      <Grid item xs={12} align="center">
-        <TextField
-          name="longitud"
-          label="Longitud"
-          type="number"
-          placeholder="Ingresa la longitud del evento con decimales"
-          value={longitud}
-          variant="outlined"
-          onChange={(e) => setLongitud(e.target.value)}
-        />
-      </Grid>
-      <Grid container spacing={1} justifyContent="center">
-        <Grid item xs={4}>
+    <div
+      style={{
+        overflowY: "scroll",
+        maxHeight: "100vh",
+        msOverflowStyle: "none", // Para Internet Explorer y Edge
+        scrollbarWidth: "none", // Para Firefox
+      }}
+    >
+      <Grid container spacing={1} direction="column" justifyContent="center">
+        <Grid item xs={12} align="center">
+          <Typography variant="h4" component="h4">
+            Agregar nuevo evento
+          </Typography>
+        </Grid>
+        <Grid item xs={12} align="center">
           <TextField
-            name="fechaHora"
-            label="Fecha y Hora de Inicio"
-            type="datetime-local"
-            value={fechaHora}
+            name="nombre"
+            label="Nombre"
+            placeholder="Ingresa el nombre del evento"
+            value={nombre}
             variant="outlined"
-            onChange={(e) => setFechaHora(e.target.value)}  // Guardar fecha y hora en un solo campo
+            onChange={(e) => setNombre(e.target.value)}
+            fullWidth
+          />
+        </Grid>
+        <Grid item xs={12} align="center">
+          <FormControl fullWidth variant="outlined">
+            <InputLabel id="categoria-label">Categoría</InputLabel>
+            <Select
+              labelId="categoria-label"
+              value={categoria}
+              onChange={handleCategoriaChange}
+              label="Categoría"
+            >
+              <MenuItem value="G">Gastronomía</MenuItem>
+              <MenuItem value="E">Entretenimiento</MenuItem>
+              <MenuItem value="AL">Aire libre</MenuItem>
+              <MenuItem value="M">Música</MenuItem>
+              <MenuItem value="C">Cine</MenuItem>
+              <MenuItem value="A">Artesanías</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} align="center">
+          <TextField
+            name="descripcion"
+            label="Descripción"
+            placeholder="Ingresa una descripción del evento"
+            value={descripcion}
+            variant="outlined"
+            onChange={(e) => setDescripcion(e.target.value)}
+            fullWidth
+          />
+        </Grid>
+        <Grid container spacing={1} justifyContent="center">
+          <Grid item xs={4}>
+            <TextField
+              name="fechaHora"
+              label="Fecha y Hora de Inicio"
+              type="datetime-local"
+              value={fechaHora}
+              variant="outlined"
+              onChange={(e) => setFechaHora(e.target.value)}
+              fullWidth
+              slotProps={{
+                inputLabel: {
+                  shrink: true,
+                },
+              }}
+            />
+          </Grid>
+        </Grid>
+        <Grid item xs={12} align="center">
+          <TextField
+            name="duracion"
+            label="Duración"
+            placeholder="hh:mm"
+            type="time"
+            value={duracion}
+            variant="outlined"
+            onChange={(e) => setDuracion(e.target.value)}
+            fullWidth
             slotProps={{
               inputLabel: {
                 shrink: true,
+                input: { step: 300 },
               },
             }}
           />
         </Grid>
+        <Grid item xs={12} align="center">
+            <Button variant="outlined" onClick={() => setMostrarMapa(!mostrarMapa)}>
+              {mostrarMapa ? "Ocultar Mapa" : "Seleccionar ubicación en el mapa"}
+            </Button>
+          </Grid>
+          {mostrarMapa && (
+            <Grid item xs={12} align="center">
+              <SeleccionarPunto
+                setLatitud={setLatitud}
+                setLongitud={setLongitud}
+                setDireccion={setDireccion}
+                setCiudad={setCiudad}
+                latitud={latitud}
+                longitud={longitud}
+              />
+            </Grid>
+          )}
+        <Grid item xs={12} align="center">
+          {error && <Typography color="error">{error}</Typography>}
+        </Grid>
+        <Grid item spacing={1} xs={12} align="center">
+          <Button variant="contained" color="primary" onClick={solicitarEventoButton}>
+            Solicitar nuevo evento
+          </Button>
+        </Grid>
+        <Grid item xs={12} align="center">
+          <Button variant="outlined" color="secondary" to="/agregarPDI" component={Link}>
+            Atrás
+          </Button>
+        </Grid>
       </Grid>
-      <Grid item xs={12} align="center">
-        <TextField
-          name="duracion"
-          label="Duración"
-          placeholder="hh:mm"
-          type="time"
-          value={duracion}
-          variant="outlined"
-          onChange={(e) => setDuracion(e.target.value)}
-          slotProps={{
-            inputLabel: {
-              shrink: true,
-              input: { step: 300 },
-            },
-          }}
-        />
-      </Grid>
-      <Grid item xs={12} align="center">
-        {error && <Typography color="error">{error}</Typography>}
-      </Grid>
-      <Grid item spacing={1} xs={12} align="center">
-        <Button variant="contained" color="primary" onClick={solicitarEventoButton}>
-          Solicitar nuevo evento
-        </Button>
-      </Grid>
-      <Grid item xs={12} align="center">
-        <Button variant="outlined" color="secondary" to="/agregarPDI" component={Link}>
-          Atrás
-        </Button>
-      </Grid>
-    </Grid>
+    </div>
   );
 }

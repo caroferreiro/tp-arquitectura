@@ -10,6 +10,7 @@ import AgregarEventoPage from "./AgregarEventoPage";
 import RevisionPage from "./RevisionPage";
 import EvaluarPDIsPage from "./EvaluarPDIsPage";
 import InfoPDI from "./InfoPDI";
+import SeleccionarPunto from "./SeleccionarPunto";
 import backgroundImage from './images/fondo.jpg';
 
 export default class UserPage extends Component {
@@ -58,56 +59,57 @@ export default class UserPage extends Component {
 
   render() {
     return (
-      <Router>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <div
-                style={{
-                  backgroundImage: `url(${backgroundImage})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  height: "100vh",
-                  width: "100vw",
-                  position: "relative",
-                  color: "white", 
-                  display: "flex", 
-                  justifyContent: "center", 
-                  alignItems: "center", 
-                }}
-              >
-                {/* Capa semi-transparente */}
+        <Router>
+          <Routes>
+            <Route
+              path="/"
+              element={
                 <div
                   style={{
-                    backgroundColor: "rgba(0, 0, 0, 0.5)", 
-                    height: "100%",
-                    width: "100%",
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    zIndex: 1,
+                    backgroundImage: `url(${backgroundImage})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    height: "100vh",
+                    width: "100vw",
+                    position: "relative",
+                    color: "white", 
+                    display: "flex", 
+                    justifyContent: "center", 
+                    alignItems: "center", 
                   }}
-                />
-                
-                {/* Contenido principal */}
-                <div style={{ position: "relative", zIndex: 2, textAlign: 'center' }}>
-                  {this.renderCreateButtons()}
+                >
+                  {/* Capa semi-transparente */}
+                  <div
+                    style={{
+                      backgroundColor: "rgba(0, 0, 0, 0.5)", 
+                      height: "100%",
+                      width: "100%",
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      zIndex: 1,
+                    }}
+                  />
+                  
+                  {/* Contenido principal */}
+                  <div style={{ position: "relative", zIndex: 2, textAlign: 'center' }}>
+                    {this.renderCreateButtons()}
+                  </div>
                 </div>
-              </div>
-            }
-          />
-          <Route path="/mapa-usuario" element={<MapViewUser />} />
-          <Route path="/mapa-admin" element={<MapViewAdmin />} />
-          <Route path="/validar-administrador" element={<CodigoAdminPage />} />
-          <Route path="/agregarPDI" element={<AgregarPDIPage />} />
-          <Route path="/agregarEvento" element={<AgregarEventoPage />} />
-          <Route path="/agregarEstablecimiento" element={<AgregarEstablecimientoPage />} />
-          <Route path="/revision" element={<RevisionPage />} />
-          <Route path="/listar-pendientes" element={<EvaluarPDIsPage />} />
-          <Route path="/pdi/:id" element={<InfoPDI />} />
-        </Routes>
-      </Router>
+              }
+            />
+            <Route path="/mapa-usuario" element={<MapViewUser />} />
+            <Route path="/mapa-admin" element={<MapViewAdmin />} />
+            <Route path="/validar-administrador" element={<CodigoAdminPage />} />
+            <Route path="/agregarPDI" element={<AgregarPDIPage />} />
+            <Route path="/agregarEvento" element={<AgregarEventoPage />} />
+            <Route path="/agregarEstablecimiento" element={<AgregarEstablecimientoPage />} />
+            <Route path="/revision" element={<RevisionPage />} />
+            <Route path="/listar-pendientes" element={<EvaluarPDIsPage />} />
+            <Route path="/seleccionar-punto" element={<SeleccionarPunto />} />
+            <Route path="/pdi/:id" element={<InfoPDI />} />
+          </Routes>
+        </Router>
     ); 
   }
 }
