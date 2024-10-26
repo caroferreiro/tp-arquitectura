@@ -11,25 +11,22 @@ export default function AgregarEventoPage() {
   const [descripcion, setDescripcion] = useState("");
   const [latitud, setLatitud] = useState("");
   const [longitud, setLongitud] = useState("");
-  const [fechaHora, setFechaHora] = useState("");
-  const [duracion, setDuracion] = useState("");
+  const [fecha, setFecha] = useState("");
+  const [horaInicio, setHoraInicio] = useState("");
+  const [horaFin, setHoraFin] = useState("");
   const [mostrarMapa, setMostrarMapa] = useState(false);
   const [error, setError] = useState(null);
 
-  const navigate = useNavigate(); // Inicializa useNavigate
+  const navigate = useNavigate(); 
 
   const handleCategoriaChange = (event) => {
     setCategoria(event.target.value);
   };
 
   const solicitarEventoButton = () => {
-    // Parsear la fecha y hora
-    const [date, time] = fechaHora.split("T");
-    const [year, month, day] = date.split("-");
-    const [hours, minutes] = time.split(":");
-
-    // Parsear la duración (hh:mm)
-    const [duracionHoras, duracionMinutos] = duracion.split(":");
+    
+    // const [startHours, startMinutes] = horaInicio.split(":");
+    // const [endHours, endMinutes] = horaFin.split(":");
 
     const requestOptions = {
       method: "POST",
@@ -40,14 +37,15 @@ export default function AgregarEventoPage() {
         direccion,
         categoria,
         descripcion,
-        latitud,
-        longitud,
-        fechaHora: `${year}-${month}-${day}T${hours}:${minutes}:00`,  // Formato ISO para fecha y hora
-        duracion: `PT${duracionHoras}H${duracionMinutos}M`,  // Formato ISO 8601 para la duración
+        latitud: parseFloat(latitud),
+        longitud: parseFloat(longitud),
+        fecha,
+        horaInicio,
+        horaFin,
       }),
     };
 
-    console.log("Datos a enviar:", requestOptions); // Imprime los datos
+    console.log("Datos a enviar:", requestOptions); 
 
     fetch("/api/agregar-evento", requestOptions)
       .then((response) => {
@@ -105,12 +103,12 @@ export default function AgregarEventoPage() {
               onChange={handleCategoriaChange}
               label="Categoría"
             >
-              <MenuItem value="G">Gastronomía</MenuItem>
-              <MenuItem value="E">Entretenimiento</MenuItem>
-              <MenuItem value="AL">Aire libre</MenuItem>
-              <MenuItem value="M">Música</MenuItem>
-              <MenuItem value="C">Cine</MenuItem>
-              <MenuItem value="A">Artesanías</MenuItem>
+              <MenuItem value="Gastronomía">Gastronomía</MenuItem>
+              <MenuItem value="Entretenimiento">Entretenimiento</MenuItem>
+              <MenuItem value="Aire libre">Aire libre</MenuItem>
+              <MenuItem value="Música">Música</MenuItem>
+              <MenuItem value="Cine">Cine</MenuItem>
+              <MenuItem value="Artesanías">Artesanías</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -123,17 +121,19 @@ export default function AgregarEventoPage() {
             variant="outlined"
             onChange={(e) => setDescripcion(e.target.value)}
             fullWidth
+            multiline
+            rows={4}
           />
         </Grid>
         <Grid container spacing={1} justifyContent="center">
           <Grid item xs={4}>
             <TextField
-              name="fechaHora"
-              label="Fecha y Hora de Inicio"
-              type="datetime-local"
-              value={fechaHora}
+              name="fecha"
+              label="Fecha"
+              type="date"
+              value={fecha}
               variant="outlined"
-              onChange={(e) => setFechaHora(e.target.value)}
+              onChange={(e) => setFecha(e.target.value)}
               fullWidth
               slotProps={{
                 inputLabel: {
@@ -142,24 +142,38 @@ export default function AgregarEventoPage() {
               }}
             />
           </Grid>
-        </Grid>
-        <Grid item xs={12} align="center">
-          <TextField
-            name="duracion"
-            label="Duración"
-            placeholder="hh:mm"
-            type="time"
-            value={duracion}
-            variant="outlined"
-            onChange={(e) => setDuracion(e.target.value)}
-            fullWidth
-            slotProps={{
-              inputLabel: {
-                shrink: true,
-                input: { step: 300 },
-              },
-            }}
-          />
+          <Grid item xs={4}>
+            <TextField
+              name="horaInicio"
+              label="Incio"
+              type="time"
+              value={horaInicio}
+              variant="outlined"
+              onChange={(e) => setHoraInicio(e.target.value)}
+              fullWidth
+              slotProps={{
+                inputLabel: {
+                  shrink: true,
+                },
+              }}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <TextField
+              name="horaFin"
+              label="Fin"
+              type="time"
+              value={horaFin}
+              variant="outlined"
+              onChange={(e) => setHoraFin(e.target.value)}
+              fullWidth
+              slotProps={{
+                inputLabel: {
+                  shrink: true,
+                },
+              }}
+            />
+          </Grid>
         </Grid>
         <Grid item xs={12} align="center">
             <Button variant="outlined" onClick={() => setMostrarMapa(!mostrarMapa)}>

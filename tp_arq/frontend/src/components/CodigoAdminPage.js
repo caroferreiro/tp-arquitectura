@@ -4,67 +4,92 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function CodigoAdminPage() {
   const [code, setCode] = useState("");
-  const [error, setError] = useState("");
+  const [errorMail, setErrorMail] = useState(""); 
+  const [errorCode, setErrorCode] = useState(""); 
   const [mail, setMail] = useState("");
   const navigate = useNavigate(); 
 
+  const isValidEmail = (email) => {
+    // Expresión regular para validar el formato de un correo electrónico
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
   const adminButtonPressed = () => {
+    setErrorMail("");
+    setErrorCode("");
+
+  
+    let valid = true; // Variable para verificar la validez de las entradas
+
+    // Validar el formato del correo electrónico
+    if (!isValidEmail(mail)) {
+      setErrorMail("Formato de mail inválido");
+      valid = false; // Establece que hay un error
+    }
+
+    // Validar el código
+    if (code !== "ABCD") {
+      setErrorCode("Código inválido"); // Establece el mensaje de error para el código
+      valid = false; // Establece que hay un error
+    }
+
+    // Si hay errores, no continuar con la solicitud
+    if (!valid) return;
+
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ mail: mail }),
     };
 
-    if (code === "ABCD") {
-      fetch("/api/agregar-admin", requestOptions)
-        .then((response) => {
-          if (response.ok) {
-            navigate(`/mapa-admin`)
+    fetch("/api/agregar-admin", requestOptions)
+      .then((response) => {
+        if (response.ok) {
+          navigate(`/mapa-admin`);
+        } else {
+          return response.json().then((data) => {
             console.log("Detalles del error:", data);
-            console.error("Error en la solicitud:", error.message);
-          } else {
-            return response.json().then((data) => {
-              console.log("Detalles del error:", data);
-              console.error("Error en la solicitud:", error.message);
-            });
-          }
-        })
-        .catch((error) => {
-          console.log("Error de red o de servidor:", error);
-        });
-    } else {
-      setError("Código inválido");
-    }
+            setErrorCode("Código inválido"); /
+          });
+        }
+      })
+      .catch((error) => {
+        console.log("Error de red o de servidor:", error);
+      });
   };
 
   return (
     <Grid container spacing={1} direction="column" justifyContent="center">
       <Grid item xs={12} align="center">
-      <Typography
-        variant="h3"
-        compact="h3"
-        className="passion-one-black"
-        sx={{ marginBottom: 6, fontWeight: 900 }} 
-      >
-        Ingresá tu mail y el código para validarte como administrador
-      </Typography>
+        <Typography
+          variant="h3"
+          compact="h3"
+          className="passion-one-black"
+          sx={{ marginBottom: 6, fontWeight: 900 }} 
+        >
+          Ingresá tu mail y el código para validarte como administrador
+        </Typography>
       </Grid>
       <Grid item xs={12} align="center">
         <TextField
+          type="email"
           label="Mail"
           placeholder="Ingresá tu mail"
           value={mail}
           variant="outlined"
           onChange={(e) => setMail(e.target.value)}
+          error={!!errorMail} // Muestra error si hay un error en el correo
+          helperText={errorMail} // Muestra el error de correo
         />
       </Grid>
       <Grid item xs={12} align="center">
         <TextField
-          error={!!error}
+          error={!!errorCode} // Muestra error si hay un error en el código
           label="Código"
           placeholder="Ingresá el código"
           value={code}
-          helperText={error}
+          helperText={errorCode} // Muestra el error de código
           variant="outlined"
           onChange={(e) => setCode(e.target.value)}
           sx={{ marginBottom: 3 }}

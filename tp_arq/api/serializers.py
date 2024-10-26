@@ -17,7 +17,7 @@ class EventoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Evento
         fields = ('id', 'nombre', 'ciudad', 'direccion', 'categoria', 
-                  'descripcion', 'latitud', 'longitud', 'estado', 'fechaHora', 'duracion')
+                  'descripcion', 'latitud', 'longitud', 'estado', 'fecha', 'horaInicio', 'horaFin')
 
 class EstablecimientoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,7 +29,7 @@ class CreateEventoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Evento
         fields = ('nombre', 'ciudad', 'direccion', 'categoria', 'descripcion',
-                  'latitud', 'longitud', 'fechaHora', 'duracion')
+                  'latitud', 'longitud', 'fecha', 'horaInicio', 'horaFin')
 
 class CreateEstablecimientoSerializer(serializers.ModelSerializer):
     class Meta:

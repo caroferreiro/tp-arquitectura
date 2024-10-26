@@ -38,11 +38,9 @@ class PDI(models.Model):
     estado = models.BooleanField(null=False, default=False)
 
 class Evento(PDI):
-    fechaHora = models.DateTimeField(null=False)  # Unifica dia, mes, ano, horaInicio y minutoInicio
-    duracion = models.DurationField(null=False)
-    # fecha = models.DateField()
-    # horaInicio = models.TimeField()
-    # horaFin = models.TimeField()
+    fecha = models.DateField(null=False)
+    horaInicio = models.TimeField(null=False)
+    horaFin = models.TimeField(null=False)
 
 class Establecimiento(PDI):
     pass

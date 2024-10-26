@@ -41,8 +41,8 @@ class AgregarEvento(APIView):
         serializer = self.serializer_class(data=request.data)
 
         nombre = request.data.get('nombre')
-        fechaHora = request.data.get('fechaHora')
-        if gestor_puntos.existeEvento(nombre, fechaHora):
+        fecha = request.data.get('fecha')
+        if gestor_puntos.existeEvento(nombre, fecha):
             return Response({'message': 'El evento ya existe.'}, status=status.HTTP_409_CONFLICT)
         
         if serializer.is_valid():
@@ -54,16 +54,12 @@ class AgregarEvento(APIView):
                 descripcion=serializer.data.get('descripcion'),
                 latitud=serializer.data.get('latitud'),
                 longitud=serializer.data.get('longitud'),
-                dia=serializer.data.get('dia'),
-                mes=serializer.data.get('mes'),
-                ano=serializer.data.get('ano'),
+                fecha=serializer.data.get('fecha'),
                 horaInicio=serializer.data.get('horaInicio'),
-                minutoInicio=serializer.data.get('minutoInicio'),
-                duracion=serializer.data.get('duracion'),
+                horaFin=serializer.data.get('horaFin'),
             )
-            nuevo_evento = serializer.save()
             return Response(EventoSerializer(nuevo_evento).data, status=status.HTTP_201_CREATED)
-
+        print("Errores de validación:", serializer.errors)
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
     
 class AgregarEstablecimiento(APIView):
