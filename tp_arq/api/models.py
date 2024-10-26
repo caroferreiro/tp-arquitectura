@@ -29,7 +29,7 @@ class PDI(models.Model):
     ]
     id = models.CharField(max_length=8, default=generate_unique_id, unique=True, primary_key=True)
     nombre = models.CharField(max_length=50, null=False, unique=False)
-    ciudad = models.CharField(max_length=50, null=False, unique=False)
+    ciudad = models.CharField(max_length=50, null=True, blank=True, unique=False)
     direccion = models.CharField(max_length=200, null=False, unique=False)
     categoria = models.CharField(max_length=15, choices=categorias)
     descripcion = models.CharField(max_length=2000, default='')
