@@ -16,10 +16,11 @@ export default function CodigoAdminPage() {
   };
 
   const adminButtonPressed = () => {
+    // Resetea los mensajes de error
     setErrorMail("");
     setErrorCode("");
 
-  
+   
     let valid = true; // Variable para verificar la validez de las entradas
 
     // Validar el formato del correo electrónico
@@ -50,7 +51,7 @@ export default function CodigoAdminPage() {
         } else {
           return response.json().then((data) => {
             console.log("Detalles del error:", data);
-            setErrorCode("Código inválido"); /
+            setErrorCode("Código inválido"); 
           });
         }
       })
