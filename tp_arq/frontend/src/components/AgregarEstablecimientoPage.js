@@ -52,7 +52,7 @@ export default function AgregarEstablecimientoPage() {
       })
       .catch((error) => {
         console.log("Error de red o de servidor:", error);
-        setError("Error de red o servidor. Inténtalo nuevamente.");
+        setError("Intentalo nuevamente.");
       });
   };
 

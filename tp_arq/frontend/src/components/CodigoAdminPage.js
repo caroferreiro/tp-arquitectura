@@ -82,6 +82,7 @@ export default function CodigoAdminPage() {
           onChange={(e) => setMail(e.target.value)}
           error={!!errorMail} // Muestra error si hay un error en el correo
           helperText={errorMail} // Muestra el error de correo
+          
         />
       </Grid>
       <Grid item xs={12} align="center">
@@ -94,6 +95,7 @@ export default function CodigoAdminPage() {
           variant="outlined"
           onChange={(e) => setCode(e.target.value)}
           sx={{ marginBottom: 3 }}
+      
         />
       </Grid>
       <Grid item xs={12} align="center">
