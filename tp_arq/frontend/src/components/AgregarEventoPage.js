@@ -71,12 +71,14 @@ export default function AgregarEventoPage() {
   return (
     <div
       style={{
-        overflowY: "scroll",
-        maxHeight: "100vh",
-        msOverflowStyle: "none", // Para Internet Explorer y Edge
-        scrollbarWidth: "none", // Para Firefox
+        display: 'flex',
+        flexDirection: 'column',
+        overflowY: "auto",
+        height: '100%',
+        padding: "10px",
+        boxSizing: "border-box",
       }}
-    >
+      >
       <Grid container spacing={1} direction="column" justifyContent="center">
         <Grid item xs={12} align="center">
           <Typography variant="h4" component="h4">
