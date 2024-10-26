@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics, status
 from .serializers import AdminSerializer, PDISerializer, EventoSerializer, EstablecimientoSerializer, CreateEventoSerializer, CreateEstablecimientoSerializer, UpdatePDISerializer
-from .models import PDI, Administrador
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .gestorPDI import GestorPDI
@@ -46,7 +45,7 @@ class AgregarEvento(APIView):
             return Response({'message': 'El evento ya existe.'}, status=status.HTTP_409_CONFLICT)
         
         if serializer.is_valid():
-            nuevo_evento = gestor_puntos.agregar_evento(
+            nuevo_evento = gestor_puntos.agregarEvento(
                 nombre=serializer.data.get('nombre'),
                 ciudad=serializer.data.get('ciudad'),
                 direccion=serializer.data.get('direccion'),
@@ -59,7 +58,7 @@ class AgregarEvento(APIView):
                 horaFin=serializer.data.get('horaFin'),
             )
             return Response(EventoSerializer(nuevo_evento).data, status=status.HTTP_201_CREATED)
-        print("Errores de validación:", serializer.errors)
+
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
     
 class AgregarEstablecimiento(APIView):
@@ -73,7 +72,7 @@ class AgregarEstablecimiento(APIView):
             return Response({'message': 'El establecimiento ya existe.'}, status=status.HTTP_409_CONFLICT)
         
         if serializer.is_valid():
-            nuevo_establecimiento = gestor_puntos.agregar_establecimiento(
+            nuevo_establecimiento = gestor_puntos.agregarEstablecimiento(
                 nombre=serializer.data.get('nombre'),
                 ciudad=serializer.data.get('ciudad'),
                 direccion=serializer.data.get('direccion'),
@@ -95,7 +94,7 @@ class AceptarPDI(APIView):
             id = serializer.data.get('id')
 
             try:
-                pdi = gestor_puntos.aceptar_PDI(id_punto=id)
+                pdi = gestor_puntos.aceptarPDI(id=id)
                 if not pdi:
                     return Response({'Bad Request': "PDI not found..."}, status=status.HTTP_404_NOT_FOUND)
                 return Response({'Message': 'PDI accepted successfully.'}, status=status.HTTP_200_OK)
@@ -112,7 +111,7 @@ class RechazarPDI(APIView):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             id = serializer.data.get('id')
-            if gestor_puntos.eliminar_PDI(id_punto=id):
+            if gestor_puntos.eliminarPDI(id=id):
                 return Response({'Message': 'Success'}, status=status.HTTP_200_OK)
         
         return Response({'Bad Request': "PDI not found..."}, status=status.HTTP_400_BAD_REQUEST)
@@ -133,7 +132,7 @@ class BuscarPDI(APIView):
 
     def get(self, request, format=None):
         id = request.query_params.get('id')
-        pdi = gestor_puntos.buscar_PDI(id=id)
+        pdi = gestor_puntos.buscarPDI(id=id)
 
         serializer = self.serializer_class(pdi, many=False)
 
