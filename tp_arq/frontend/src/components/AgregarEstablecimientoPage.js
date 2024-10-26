@@ -69,9 +69,14 @@ export default function AgregarEstablecimientoPage() {
       >
       <Grid container spacing={1} direction="column" justifyContent="center">
         <Grid item xs={12} align="center">
-          <Typography variant="h4" component="h4">
-            Agregar nuevo establecimiento
-          </Typography>
+        <Typography
+          variant="h3"
+          compact="h3"
+          className="passion-one-black"
+          sx={{ marginBottom: 6, fontWeight: 900 }} 
+        >
+          Nuevo establecimiento
+        </Typography>
         </Grid>
         <Grid item xs={12} align="center">
           <TextField

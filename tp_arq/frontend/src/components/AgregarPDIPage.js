@@ -11,10 +11,11 @@ export default class AgregarPDIPage extends Component {
     return (
       <Grid container spacing={2} direction="column" justifyContent="center">
         <Grid item xs={12} align="center">
-          <Typography
+        <Typography
           variant="h3"
           compact="h3"
-          sx={{ marginBottom: 6 }} 
+          className="passion-one-black"
+          sx={{ marginBottom: 6, fontWeight: 900 }} 
         >
           Agregar un nuevo...
         </Typography>
@@ -27,6 +28,7 @@ export default class AgregarPDIPage extends Component {
               size="large"
               component={Link}
               to="/agregarEvento"
+              sx={{ padding: '16px 32px', fontSize: '1.5rem' }}
             >
               Evento
             </Button>
@@ -36,13 +38,20 @@ export default class AgregarPDIPage extends Component {
               size="large"
               component={Link}
               to="/agregarEstablecimiento"
+              sx={{ padding: '16px 32px', fontSize: '1.5rem' }}
             >
               Establecimiento
             </Button>
           </ButtonGroup>
         </Grid>
         <Grid item xs={12} align="center">  
-          <Button variant="outlined" color="secondary" component={Link} to="/mapa-usuario">
+          <Button 
+            variant="outlined" 
+            color="secondary" 
+            component={Link} 
+            to="/mapa-usuario"
+            sx={{ marginTop: 4 }} 
+            >
             Volver al inicio
           </Button>
         </Grid>

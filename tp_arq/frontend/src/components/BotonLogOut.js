@@ -60,7 +60,7 @@ const BotonLogOut = () => {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <DialogTitle id="alert-dialog-title">{"¿Estás seguro que quieres salir?"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{"¿Estás seguro que querés salir?"}</DialogTitle>
             <DialogContent>
             <DialogContentText id="alert-dialog-description">
                 Al salir cerrarás tu sesión actual.
