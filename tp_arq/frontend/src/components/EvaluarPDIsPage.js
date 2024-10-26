@@ -91,8 +91,8 @@ export default function ListaPDIsPage() {
     <Grid container spacing={2} direction="column" justifyContent="center">
       <Grid item xs={12} align="center">
         <Typography 
-          variant="h4" 
-          component="h4"
+          variant="h3" 
+          component="h3"
           className="passion-one-black" 
           align="center"
           sx={{ fontWeight: 700, marginBottom: 4}}>
