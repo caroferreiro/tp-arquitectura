@@ -19,7 +19,7 @@ class GestorPDI:
     def existeEstablecimiento(self, nombre):
         return Establecimiento.objects.filter(nombre=nombre).exists()
     
-    def aceptarPDI(self, id_punto):
+    def aceptarPDI(self, id):
         try:
             punto = PDI.objects.get(id=id)
             punto.estado = True
