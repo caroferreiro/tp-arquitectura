@@ -44,3 +44,7 @@ class Evento(PDI):
 
 class Establecimiento(PDI):
     pass
+
+class Imagen(models.Model):
+    pdi = models.ForeignKey(PDI, related_name='imagenes', on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to='imagenes_pdi/')

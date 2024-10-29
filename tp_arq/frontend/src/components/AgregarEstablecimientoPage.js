@@ -11,6 +11,8 @@ export default function AgregarEstablecimientoPage() {
   const [descripcion, setDescripcion] = useState("");
   const [latitud, setLatitud] = useState("");
   const [longitud, setLongitud] = useState("");
+  const [imagenes, setImagenes] = useState([]);
+  const [imagenesPreview, setImagenesPreview] = useState([]);
   const [mostrarMapa, setMostrarMapa] = useState(false);
   const [error, setError] = useState(null);
   
@@ -20,23 +22,35 @@ export default function AgregarEstablecimientoPage() {
     setCategoria(event.target.value);
   };
 
-  const solicitarEstablecimientoButton = () => {
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        nombre,
-        ciudad,
-        direccion,
-        categoria,
-        descripcion,
-        latitud: parseFloat(latitud),
-        longitud: parseFloat(longitud),
-      }),
-    };
-    console.log("Datos a enviar:", requestOptions);
+  const handleImagenesChange = (event) => {
+    const files = event.target.files;
+    const newImagenes = Array.from(files);
+    
+    setImagenes(prev => [...prev, ...newImagenes]);
+    setImagenesPreview(prev => [
+      ...prev,
+      ...newImagenes.map(file => URL.createObjectURL(file))
+    ]);
+  };
 
-    fetch("/api/agregar-establecimiento", requestOptions)
+  const solicitarEstablecimientoButton = () => {
+    const formData = new FormData();
+    formData.append("nombre", nombre);
+    formData.append("ciudad", ciudad);
+    formData.append("direccion", direccion);
+    formData.append("categoria", categoria);
+    formData.append("descripcion", descripcion);
+    formData.append("latitud", parseFloat(latitud));
+    formData.append("longitud", parseFloat(longitud));
+    
+    Array.from(imagenes).forEach((imagen, index) => {
+      formData.append(`imagenes[${index}]`, imagen);
+    });
+
+    fetch("/api/agregar-establecimiento", {
+      method: "POST",
+      body: formData,
+    })
       .then((response) => {
         if (response.ok) {
           navigate(`/revision`);
@@ -137,20 +151,27 @@ export default function AgregarEstablecimientoPage() {
             />
           </Grid>
         )}
-        {/* <Grid item xs={12}>
-          {ciudad && (
-            <Typography variant="body1">
-              <strong>Ciudad:</strong> {ciudad}
-            </Typography>
+        <Grid item xs={12} align="center">
+          <Button variant="outlined" component="label">
+            Cargar Imágenes
+            <input
+              type="file"
+              multiple
+              hidden
+              onChange={handleImagenesChange}
+              accept="image/*"
+            />
+          </Button>
+        </Grid>
+        <Grid xs={12} align="center">
+          {imagenesPreview.length > 0 && (
+            <Grid container spacing={1} align="center">
+              {imagenesPreview.map((src, index) => (
+                  <img src={src} alt={`Vista previa ${index + 1}`} style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '5px' }} />
+              ))}
+            </Grid>
           )}
         </Grid>
-        <Grid item xs={12}>
-          {direccion && (
-            <Typography variant="body1">
-            <strong>Dirección:</strong> {direccion}
-            </Typography>
-          )}
-        </Grid> */}
         <Grid item xs={12} align="center">
           {error && <Typography color="error">{error}</Typography>}
         </Grid>

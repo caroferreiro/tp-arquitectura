@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics, status
-from .serializers import AdminSerializer, PDISerializer, EventoSerializer, EstablecimientoSerializer, CreateEventoSerializer, CreateEstablecimientoSerializer, UpdatePDISerializer
+from .serializers import AdminSerializer, PDISerializer, EventoSerializer, EstablecimientoSerializer, CreateEventoSerializer, CreateEstablecimientoSerializer, UpdatePDISerializer, ImagenSerializer, CreateImagenSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .gestorPDI import GestorPDI
@@ -84,6 +84,20 @@ class AgregarEstablecimiento(APIView):
             return Response(EstablecimientoSerializer(nuevo_establecimiento).data, status=status.HTTP_201_CREATED)
         print("Errores de validación:", serializer.errors)
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+    
+class AgregarImagen(APIView):
+    serializer_class = CreateImagenSerializer
+
+    def post(self, request, format=None):
+        id = request.data.get('id')
+        pdi = gestor_puntos.buscarPDI(id=id)
+
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.save(pdi=pdi)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class AceptarPDI(APIView):
     serializer_class = UpdatePDISerializer
