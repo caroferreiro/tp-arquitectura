@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Typography, Box } from "@mui/material";
+import { Grid2 as Grid, Typography, Box } from "@mui/material";
 
 const InfoPDI = () => {
   const { id } = useParams();
@@ -31,22 +31,36 @@ const InfoPDI = () => {
   }
 
   return (
-    <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>
-        {pdi.nombre}
-      </Typography>
-      <Typography variant="body1">
-        <strong>Ciudad:</strong> {pdi.ciudad}
-      </Typography>
-      <Typography variant="body1">
-        <strong>Dirección:</strong> {pdi.direccion}
-      </Typography>
-      <Typography variant="body1">
-        <strong>Categoría:</strong> {pdi.categoria}
-      </Typography>
-      <Typography variant="body1">
-        <strong>Descripción:</strong> {pdi.descripcion}
-      </Typography>
+    <Box sx={{ p: 20 }}>
+      <Grid container spacing={1} direction="column" justifyContent="center">
+        <Grid item xs={12} align="center">
+          <Typography variant="h4" gutterBottom>
+            {pdi.nombre}
+          </Typography>
+        </Grid>
+        <Grid item xs={12} align="left">
+          {pdi.ciudad && (
+            <Typography variant="body1">
+              <strong>Ciudad:</strong> {pdi.ciudad}
+            </Typography>
+          )}
+        </Grid>
+        <Grid item xs={12} align="left">
+          <Typography variant="body1" align="left">
+            <strong>Dirección:</strong> {pdi.direccion}
+          </Typography>
+        </Grid>
+        <Grid item xs={12} align="left">
+          <Typography variant="body1" align="left">
+            <strong>Categoría:</strong> {pdi.categoria}
+          </Typography>
+        </Grid>
+        <Grid item xs={12} align="left">
+          <Typography variant="body1" align="left">
+            <strong>Descripción:</strong> {pdi.descripcion}
+          </Typography>
+        </Grid>
+      </Grid>
     </Box>
   );
 };
