@@ -12,6 +12,7 @@ const InfoPDI = () => {
       try {
         const response = await fetch(`/api/buscar-pdi?id=${id}`);
         const data = await response.json();
+        console.log("Datos del PDI:", data); // Verifica la estructura
         setPdi(data);
       } catch (error) {
         console.error("Error al obtener los detalles del PDI:", error);
@@ -42,6 +43,25 @@ const InfoPDI = () => {
             {pdi.nombre}
           </Typography>
         </Grid>
+        <Grid item xs={12} align="center">
+          {pdi.imagenes && pdi.imagenes.length > 0 && (
+            <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, flexWrap: 'wrap', marginBottom: 5 }}>
+              {pdi.imagenes.map((img) => {
+                console.log("URL de imagen:", img.imagen_url); // Verifica cada URL
+                return (
+                  <img 
+                    key={img.id} 
+                    src={img.imagen_url} 
+                    alt={`Imagen de ${pdi.nombre}`} 
+                    style={{ maxWidth: '100%', height: 'auto', maxHeight: 300, borderRadius: 8 }}
+                  />
+                );
+              })}
+            </Box>
+          )}
+        </Grid>
+
+        {/* Información del PDI */}
         <Grid item xs={12} align="left">
           {pdi.ciudad && (
             <Typography variant="body1">
@@ -61,7 +81,6 @@ const InfoPDI = () => {
             <Typography variant="body1" align="left">
               <strong>Descripción:</strong> {pdi.descripcion}
             </Typography>
-
         </Grid>
       </Grid>
     </Box>

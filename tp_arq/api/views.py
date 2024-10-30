@@ -45,6 +45,7 @@ class AgregarEvento(APIView):
             return Response({'message': 'El evento ya existe.'}, status=status.HTTP_409_CONFLICT)
         
         if serializer.is_valid():
+            imagenes = [request.FILES[key] for key in request.FILES if key.startswith('imagenes')]
             nuevo_evento = gestor_puntos.agregarEvento(
                 nombre=serializer.data.get('nombre'),
                 ciudad=serializer.data.get('ciudad'),
@@ -56,22 +57,26 @@ class AgregarEvento(APIView):
                 fecha=serializer.data.get('fecha'),
                 horaInicio=serializer.data.get('horaInicio'),
                 horaFin=serializer.data.get('horaFin'),
+                imagenes=imagenes
             )
             return Response(EventoSerializer(nuevo_evento).data, status=status.HTTP_201_CREATED)
 
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
     
 class AgregarEstablecimiento(APIView):
+    
     serializer_class = CreateEstablecimientoSerializer
     
     def post(self, request, format=None):
         serializer = self.serializer_class(data=request.data)
         
         nombre = request.data.get('nombre')
+        
         if gestor_puntos.existeEstablecimiento(nombre):
             return Response({'message': 'El establecimiento ya existe.'}, status=status.HTTP_409_CONFLICT)
         
         if serializer.is_valid():
+            imagenes = [request.FILES[key] for key in request.FILES if key.startswith('imagenes')]
             nuevo_establecimiento = gestor_puntos.agregarEstablecimiento(
                 nombre=serializer.data.get('nombre'),
                 ciudad=serializer.data.get('ciudad'),
@@ -80,24 +85,11 @@ class AgregarEstablecimiento(APIView):
                 descripcion=serializer.data.get('descripcion'),
                 latitud=serializer.data.get('latitud'),
                 longitud=serializer.data.get('longitud'),
+                imagenes=imagenes
             )
             return Response(EstablecimientoSerializer(nuevo_establecimiento).data, status=status.HTTP_201_CREATED)
-        print("Errores de validación:", serializer.errors)
+       
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
-    
-class AgregarImagen(APIView):
-    serializer_class = CreateImagenSerializer
-
-    def post(self, request, format=None):
-        id = request.data.get('id')
-        pdi = gestor_puntos.buscarPDI(id=id)
-
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
-            serializer.save(pdi=pdi)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class AceptarPDI(APIView):
     serializer_class = UpdatePDISerializer
@@ -148,6 +140,6 @@ class BuscarPDI(APIView):
         id = request.query_params.get('id')
         pdi = gestor_puntos.buscarPDI(id=id)
 
-        serializer = self.serializer_class(pdi, many=False)
+        serializer = self.serializer_class(pdi, many=False, context={'request': request})
 
         return Response(serializer.data, status=status.HTTP_200_OK)

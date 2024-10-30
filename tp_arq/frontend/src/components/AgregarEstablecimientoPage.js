@@ -167,7 +167,7 @@ export default function AgregarEstablecimientoPage() {
           {imagenesPreview.length > 0 && (
             <Grid container spacing={1} align="center">
               {imagenesPreview.map((src, index) => (
-                  <img src={src} alt={`Vista previa ${index + 1}`} style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '5px' }} />
+                  <img key={index} src={src} alt={`Vista previa ${index + 1}`} style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '5px' }} />
               ))}
             </Grid>
           )}

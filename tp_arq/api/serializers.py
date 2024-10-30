@@ -8,9 +8,16 @@ class AdminSerializer(serializers.ModelSerializer):
         fields = ('mail',)
 
 class ImagenSerializer(serializers.ModelSerializer):
+
+    imagen_url = serializers.SerializerMethodField()
+
     class Meta:
         model = Imagen
-        fields = ('id', 'imagen')
+        fields = ('id', 'imagen', 'imagen_url')
+    
+    def get_imagen_url(self, obj):
+        request = self.context.get('request')
+        return request.build_absolute_uri(obj.imagen.url) if request else obj.imagen.url
 
 class PDISerializer(serializers.ModelSerializer):
     imagenes = ImagenSerializer(many=True, read_only=True)
@@ -19,6 +26,7 @@ class PDISerializer(serializers.ModelSerializer):
         model = PDI
         fields = ('id', 'nombre', 'ciudad', 'direccion', 'categoria',
                   'descripcion', 'latitud', 'longitud', 'estado', 'imagenes')
+
 
 class EventoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -52,6 +60,11 @@ class CreateImagenSerializer(serializers.ModelSerializer):
     class Meta:
         model = Imagen
         fields = ('imagen',)
+    
+    def validate_imagen(self, value):
+        if not value.name.endswith(('.jpg', '.jpeg', '.png')):
+            raise serializers.ValidationError("La imagen debe ser un archivo JPEG o PNG.")
+        return value
 
 class UpdatePDISerializer(serializers.ModelSerializer):
     id = serializers.CharField(validators=[])

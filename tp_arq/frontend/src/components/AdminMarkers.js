@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Marker, Popup } from "react-leaflet";
+import { Button } from "@mui/material"; 
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import redMarker from "./icons/red_marker.png"; 
@@ -46,6 +47,26 @@ const AdminMarkers = () => {
     obtenerPDIs();
   }, []);
 
+  const handleEliminarPDI = async (id) => {
+    try {
+      const response = await fetch("/api/rechazar-pdi", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id }),
+      });
+
+      if (response.ok) {
+        setPDIs(PDIs.filter((pdi) => pdi.id !== id)); // Remover el PDI eliminado del estado
+      } else {
+        console.error("Error al eliminar el PDI:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error de red o de servidor:", error);
+    }
+  };
+
   return (
     <>
       {PDIs.map((PDI) => (
@@ -56,6 +77,18 @@ const AdminMarkers = () => {
         >
           <Popup>
             <strong>{PDI.nombre}</strong>
+            <br />
+            <br />
+            {PDI.estado && (
+              <Button
+                variant="contained"
+                color="error"   
+                size="small"   
+                onClick={() => handleEliminarPDI(PDI.id)}
+              >
+                Eliminar
+              </Button>
+            )}
           </Popup>
         </Marker>
       ))}
