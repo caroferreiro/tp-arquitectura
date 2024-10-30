@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Grid2 as Grid, Typography, Box } from "@mui/material";
+import { Grid2 as Grid, Typography, Box, Divider } from "@mui/material";
 
 const InfoPDI = () => {
   const { id } = useParams();
@@ -34,7 +34,11 @@ const InfoPDI = () => {
     <Box sx={{ p: 20 }}>
       <Grid container spacing={1} direction="column" justifyContent="center">
         <Grid item xs={12} align="center">
-          <Typography variant="h4" gutterBottom>
+          <Typography 
+            variant="h3"
+            className="passion-one-black" 
+            color="primary"
+            sx={{ fontWeight: 700, marginBottom: 10, fontSize: 90, textTransform: 'uppercase' }}>
             {pdi.nombre}
           </Typography>
         </Grid>
@@ -46,19 +50,18 @@ const InfoPDI = () => {
           )}
         </Grid>
         <Grid item xs={12} align="left">
-          <Typography variant="body1" align="left">
-            <strong>Dirección:</strong> {pdi.direccion}
-          </Typography>
-        </Grid>
-        <Grid item xs={12} align="left">
-          <Typography variant="body1" align="left">
-            <strong>Categoría:</strong> {pdi.categoria}
-          </Typography>
-        </Grid>
-        <Grid item xs={12} align="left">
-          <Typography variant="body1" align="left">
-            <strong>Descripción:</strong> {pdi.descripcion}
-          </Typography>
+            <Typography variant="body1" align="left">
+              <strong>Dirección:</strong> {pdi.direccion}
+            </Typography>
+            <Divider sx={{ my: 1 }} /> {/* Línea separadora */}
+            <Typography variant="body1" align="left">
+              <strong>Categoría:</strong> {pdi.categoria}
+            </Typography>
+            <Divider sx={{ my: 1 }} /> {/* Línea separadora */}
+            <Typography variant="body1" align="left">
+              <strong>Descripción:</strong> {pdi.descripcion}
+            </Typography>
+
         </Grid>
       </Grid>
     </Box>
