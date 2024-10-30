@@ -14,6 +14,8 @@ export default function AgregarEventoPage() {
   const [fecha, setFecha] = useState("");
   const [horaInicio, setHoraInicio] = useState("");
   const [horaFin, setHoraFin] = useState("");
+  const [imagenes, setImagenes] = useState([]);
+  const [imagenesPreview, setImagenesPreview] = useState([]);
   const [mostrarMapa, setMostrarMapa] = useState(false);
   const [error, setError] = useState(null);
 
@@ -23,42 +25,48 @@ export default function AgregarEventoPage() {
     setCategoria(event.target.value);
   };
 
-  const solicitarEventoButton = () => {
+  const handleImagenesChange = (event) => {
+    const files = event.target.files;
+    const newImagenes = Array.from(files);
     
-    // const [startHours, startMinutes] = horaInicio.split(":");
-    // const [endHours, endMinutes] = horaFin.split(":");
+    setImagenes(prev => [...prev, ...newImagenes]);
+    setImagenesPreview(prev => [
+      ...prev,
+      ...newImagenes.map(file => URL.createObjectURL(file))
+    ]);
+  };
 
-    const requestOptions = {
+  const solicitarEventoButton = () => {
+    const formData = new FormData();
+    formData.append("nombre", nombre);
+    formData.append("ciudad", ciudad);
+    formData.append("direccion", direccion);
+    formData.append("categoria", categoria);
+    formData.append("descripcion", descripcion);
+    formData.append("latitud", parseFloat(latitud));
+    formData.append("longitud", parseFloat(longitud));
+    formData.append("fecha", fecha);
+    formData.append("horaInicio", horaInicio);
+    formData.append("horaFin", horaFin);
+
+    Array.from(imagenes).forEach((imagen, index) => {
+      formData.append(`imagenes[${index}]`, imagen);
+    });
+
+    fetch("/api/agregar-evento", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        nombre,
-        ciudad,
-        direccion,
-        categoria,
-        descripcion,
-        latitud: parseFloat(latitud),
-        longitud: parseFloat(longitud),
-        fecha,
-        horaInicio,
-        horaFin,
-      }),
-    };
-
-    console.log("Datos a enviar:", requestOptions); 
-
-    fetch("/api/agregar-evento", requestOptions)
+      body: formData,
+    })
       .then((response) => {
         if (response.ok) {
-          console.log("Evento agregado con éxito");
           navigate("/revision");
         } else if (response.status === 409) {
           setError("El evento ya existe.");
         } else {
           console.log(`Error: ${response.status} - ${response.statusText}`);
           return response.json().then((data) => {
-            console.log("Detalles del error:", data);
             setError("Ocurrió un error al agregar el evento.");
+            console.log("Detalles del error:", data);
           });
         }
       })
@@ -85,7 +93,7 @@ export default function AgregarEventoPage() {
           variant="h3"
           compact="h3"
           className="passion-one-black"
-          sx={{ marginBottom: 6, fontWeight: 900 }} 
+          sx={{ marginBottom: 4, fontWeight: 900 }} 
         >
           Nuevo evento
         </Typography>
@@ -183,22 +191,43 @@ export default function AgregarEventoPage() {
           </Grid>
         </Grid>
         <Grid item xs={12} align="center">
-            <Button variant="outlined" onClick={() => setMostrarMapa(!mostrarMapa)}>
-              {mostrarMapa ? "Ocultar Mapa" : "Seleccionar ubicación en el mapa"}
-            </Button>
+          <Button variant="outlined" onClick={() => setMostrarMapa(!mostrarMapa)}>
+            {mostrarMapa ? "Ocultar Mapa" : "Seleccionar ubicación en el mapa"}
+          </Button>
+        </Grid>
+        {mostrarMapa && (
+          <Grid item xs={12} align="center">
+            <SeleccionarPunto
+              setLatitud={setLatitud}
+              setLongitud={setLongitud}
+              setDireccion={setDireccion}
+              setCiudad={setCiudad}
+              latitud={latitud}
+              longitud={longitud}
+            />
           </Grid>
-          {mostrarMapa && (
-            <Grid item xs={12} align="center">
-              <SeleccionarPunto
-                setLatitud={setLatitud}
-                setLongitud={setLongitud}
-                setDireccion={setDireccion}
-                setCiudad={setCiudad}
-                latitud={latitud}
-                longitud={longitud}
-              />
+        )}
+        <Grid item xs={12} align="center">
+          <Button variant="outlined" component="label">
+            Cargar Imágenes
+            <input
+              type="file"
+              multiple
+              hidden
+              onChange={handleImagenesChange}
+              accept="image/*"
+            />
+          </Button>
+        </Grid>
+        <Grid xs={12} align="center">
+          {imagenesPreview.length > 0 && (
+            <Grid container spacing={1} align="center">
+              {imagenesPreview.map((src, index) => (
+                  <img src={src} alt={`Vista previa ${index + 1}`} style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '5px' }} />
+              ))}
             </Grid>
           )}
+        </Grid>
         <Grid item xs={12} align="center">
           {error && <Typography color="error">{error}</Typography>}
         </Grid>

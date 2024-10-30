@@ -87,7 +87,7 @@ export default function AgregarEstablecimientoPage() {
           variant="h3"
           compact="h3"
           className="passion-one-black"
-          sx={{ marginBottom: 6, fontWeight: 900 }} 
+          sx={{ marginBottom: 5, fontWeight: 900 }} 
         >
           Nuevo establecimiento
         </Typography>
