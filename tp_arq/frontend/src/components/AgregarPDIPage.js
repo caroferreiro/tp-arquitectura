@@ -14,36 +14,40 @@ export default class AgregarPDIPage extends Component {
         <Typography
           variant="h3"
           compact="h3"
-          className="passion-one-black"
           sx={{ marginBottom: 6, fontWeight: 900 }} 
         >
-          Agregar un nuevo...
+          ¿Qué deseás añadir?
         </Typography>
         </Grid>  
-        <Grid item xs={12} align="center"> 
-          <ButtonGroup disableElevation variant="contained" sx={{ gap: 2 }}>
-            <Button
-              color="primary"
-              variant="contained"
-              size="large"
-              component={Link}
-              to="/agregarEvento"
-              sx={{ padding: '16px 32px', fontSize: '1.5rem' }}
-            >
-              Evento
-            </Button>
-            <Button
-              color="secondary"
-              variant="contained"
-              size="large"
-              component={Link}
-              to="/agregarEstablecimiento"
-              sx={{ padding: '16px 32px', fontSize: '1.5rem' }}
-            >
-              Establecimiento
-            </Button>
-          </ButtonGroup>
+        <Grid item xs={12} align="center">
+          <Grid container spacing={2} justifyContent="center">
+            <Grid item>
+              <Button
+                color="primary"
+                variant="contained"
+                size="large"
+                component={Link}
+                to="/agregarEvento"
+                sx={{ padding: '16px 32px', fontSize: '1.5rem' }}
+              >
+                Evento
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                color="secondary"
+                variant="contained"
+                size="large"
+                component={Link}
+                to="/agregarEstablecimiento"
+                sx={{ padding: '16px 32px', fontSize: '1.5rem' }}
+              >
+                Establecimiento
+              </Button>
+            </Grid>
+          </Grid>
         </Grid>
+
         <Grid item xs={12} align="center">  
           <Button 
             variant="outlined" 

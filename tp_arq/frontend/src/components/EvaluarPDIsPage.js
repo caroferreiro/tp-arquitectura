@@ -93,7 +93,6 @@ export default function ListaPDIsPage() {
         <Typography 
           variant="h3" 
           component="h3"
-          className="passion-one-black" 
           align="center"
           sx={{ fontWeight: 700, marginBottom: 4}}>
           Puntos de interés pendientes de revisión

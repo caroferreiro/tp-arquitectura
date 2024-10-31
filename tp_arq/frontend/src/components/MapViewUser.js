@@ -5,13 +5,14 @@ import UserMarkers from "./UserMarkers";
 import BotonAgregarPDI from "./BotonAgregarPDI";
 
 
+
 const MapViewUser = () => {
 
     return (
         <div>
             <MapContainer 
                 center={[-38.95231561788808, -68.05600596781214]} 
-                zoom={13} 
+                zoom={10} 
                 scrollWheelZoom={false} 
                 className="leaflet-container"
                 style={{ height: "100vh", width: "100vw" }}

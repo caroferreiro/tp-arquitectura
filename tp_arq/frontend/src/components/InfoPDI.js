@@ -32,14 +32,13 @@ const InfoPDI = () => {
   }
 
   return (
-    <Box sx={{ p: 20 }}>
+    <Box sx={{ p: 10 }}>
       <Grid container spacing={1} direction="column" justifyContent="center">
         <Grid item xs={12} align="center">
           <Typography 
             variant="h3"
-            className="passion-one-black" 
-            color="primary"
-            sx={{ fontWeight: 700, marginBottom: 10, fontSize: 90, textTransform: 'uppercase' }}>
+            sx={{ fontFamily: 'Gloria Hallelujah', fontWeight: 700, marginBottom: 10, fontSize: 90, textTransform: 'uppercase' }}
+          >
             {pdi.nombre}
           </Typography>
         </Grid>
@@ -53,7 +52,7 @@ const InfoPDI = () => {
                     key={img.id} 
                     src={img.imagen_url} 
                     alt={`Imagen de ${pdi.nombre}`} 
-                    style={{ maxWidth: '100%', height: 'auto', maxHeight: 300, borderRadius: 8 }}
+                    style={{ maxWidth: '300px', height: 'auto', borderRadius: 8 }}
                   />
                 );
               })}

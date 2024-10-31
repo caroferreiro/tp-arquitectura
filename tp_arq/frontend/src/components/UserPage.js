@@ -24,7 +24,6 @@ export default class UserPage extends Component {
         <Grid item xs={12}>
           <Typography
             variant="h1" 
-            className="passion-one-black" 
             align="center"
             sx={{ fontWeight: 900, fontSize: '8rem' }}
           >

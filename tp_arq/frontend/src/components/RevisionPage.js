@@ -15,7 +15,6 @@ export default class CodigoAdminPage extends Component {
           <Typography
             variant="h3"
             compact="h3"
-            className="passion-one-black"
             sx={{ marginBottom: 2, fontWeight: 900 }} 
           >
             Tu punto de interés está siendo revisado

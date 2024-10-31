@@ -5,10 +5,8 @@ import L from "leaflet"; // Importa Leaflet directamente
 import "leaflet/dist/leaflet.css"; // Importa el CSS de Leaflet
 import blueMarker from "./icons/blue_marker.png"; 
 
-// Configurar el icono personalizado a nivel global para evitar problemas con el cargado de imágenes
 delete L.Icon.Default.prototype._getIconUrl;
 
-// Definir el ícono personalizado para los marcadores
 const customIcon = new L.Icon({
     iconUrl: blueMarker, 
     shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
@@ -43,9 +41,18 @@ const UserMarkers = () => {
           <Popup>
             <strong>{PDI.nombre}</strong>
             <br />
-            <Link to={`/pdi/${PDI.id}`} style={{ textDecoration: 'underline', color: 'primary' }}>
-              Ver info
-            </Link>
+            <br />
+            <div style={{ textAlign: 'center' }}>
+              <Link 
+                to={`/pdi/${PDI.id}`} 
+                style={{
+                  textDecoration: 'underline',
+                  color: 'primary',
+                  fontWeight: 'bold' 
+                }}>
+                Ver info
+              </Link>
+            </div>
           </Popup>
         </Marker>
       ))}

@@ -92,7 +92,6 @@ export default function AgregarEventoPage() {
         <Typography
           variant="h3"
           compact="h3"
-          className="passion-one-black"
           sx={{ marginBottom: 4, fontWeight: 900 }} 
         >
           Nuevo evento

@@ -66,7 +66,6 @@ export default function CodigoAdminPage() {
         <Typography
           variant="h3"
           compact="h3"
-          className="passion-one-black"
           sx={{ marginBottom: 6, fontWeight: 900 }} 
         >
           Ingresá tu mail y el código para validarte como administrador
