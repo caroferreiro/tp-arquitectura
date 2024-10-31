@@ -26,6 +26,8 @@ const BotonListarPDIs = () => {
         boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
         cursor: "pointer",
         zIndex: 1000,
+        fontFamily: "Poppins",
+        fontWeight: 300,
     };
 
     const buttonHoverStyle = {

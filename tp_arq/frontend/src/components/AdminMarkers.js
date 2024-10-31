@@ -76,7 +76,7 @@ const AdminMarkers = () => {
           icon={PDI.estado ? iconAprobado : iconNoAprobado} // Usar ícono según el estado
         >
           <Popup>
-            <strong>{PDI.nombre}</strong>
+            <strong style={{ fontFamily: 'Poppins', fontWeight: 600, align: 'center' }}>{PDI.nombre}</strong>
             <br />
             <br />
             {PDI.estado && (
@@ -85,6 +85,7 @@ const AdminMarkers = () => {
                 color="error"   
                 size="small"   
                 onClick={() => handleEliminarPDI(PDI.id)}
+                style={{ fontFamily: 'Poppins', fontWeight: 300, fontSize: 11 }}
               >
                 Eliminar
               </Button>

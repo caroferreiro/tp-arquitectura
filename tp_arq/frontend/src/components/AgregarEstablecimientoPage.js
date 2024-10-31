@@ -86,7 +86,7 @@ export default function AgregarEstablecimientoPage() {
         <Typography
           variant="h3"
           compact="h3"
-          sx={{ marginBottom: 5, fontWeight: 900 }} 
+          sx={{ marginBottom: 5, fontFamily: 'Poppins', fontWeight: 700 }} 
         >
           Nuevo establecimiento
         </Typography>
@@ -134,7 +134,7 @@ export default function AgregarEstablecimientoPage() {
           />
         </Grid>
         <Grid item xs={12} align="center">
-          <Button variant="outlined" onClick={() => setMostrarMapa(!mostrarMapa)}>
+          <Button variant="outlined" onClick={() => setMostrarMapa(!mostrarMapa)} sx={{fontFamily: 'Poppins', fontWeight: 600}}>
             {mostrarMapa ? "Ocultar Mapa" : "Seleccionar ubicación en el mapa"}
           </Button>
         </Grid>
@@ -151,7 +151,7 @@ export default function AgregarEstablecimientoPage() {
           </Grid>
         )}
         <Grid item xs={12} align="center">
-          <Button variant="outlined" component="label">
+          <Button variant="outlined" component="label" sx={{fontFamily: 'Poppins', fontWeight: 600}}>
             Cargar Imágenes
             <input
               type="file"
@@ -175,12 +175,12 @@ export default function AgregarEstablecimientoPage() {
           {error && <Typography color="error">{error}</Typography>}
         </Grid>
         <Grid item spacing={1} xs={12} align="center">
-          <Button variant="contained" color="primary" onClick={solicitarEstablecimientoButton}>
+          <Button variant="contained" color="primary" onClick={solicitarEstablecimientoButton} sx={{fontFamily: 'Poppins', fontWeight: 400}}>
             Solicitar nuevo establecimiento
           </Button>
         </Grid>
         <Grid item xs={12} align="center">
-          <Button variant="outlined" color="secondary" to="/agregarPDI" component={Link}>
+          <Button variant="outlined" color="secondary" to="/agregarPDI" component={Link} sx={{fontFamily: 'Poppins', fontWeight: 400}}>
             Atrás
           </Button>
         </Grid>

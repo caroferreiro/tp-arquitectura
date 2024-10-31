@@ -37,7 +37,7 @@ const InfoPDI = () => {
         <Grid item xs={12} align="center">
           <Typography 
             variant="h3"
-            sx={{ fontFamily: 'Gloria Hallelujah', fontWeight: 700, marginBottom: 10, fontSize: 90, textTransform: 'uppercase' }}
+            sx={{ fontFamily: 'Gloria Hallelujah', fontWeight: 700, marginBottom: 5, fontSize: 80, textTransform: 'uppercase' }}
           >
             {pdi.nombre}
           </Typography>
@@ -59,27 +59,24 @@ const InfoPDI = () => {
             </Box>
           )}
         </Grid>
-
-        {/* Información del PDI */}
         <Grid item xs={12} align="left">
           {pdi.ciudad && (
-            <Typography variant="body1">
+            <Typography variant="body1" align="left" sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
               <strong>Ciudad:</strong> {pdi.ciudad}
             </Typography>
           )}
-        </Grid>
-        <Grid item xs={12} align="left">
-            <Typography variant="body1" align="left">
-              <strong>Dirección:</strong> {pdi.direccion}
-            </Typography>
-            <Divider sx={{ my: 1 }} /> {/* Línea separadora */}
-            <Typography variant="body1" align="left">
-              <strong>Categoría:</strong> {pdi.categoria}
-            </Typography>
-            <Divider sx={{ my: 1 }} /> {/* Línea separadora */}
-            <Typography variant="body1" align="left">
-              <strong>Descripción:</strong> {pdi.descripcion}
-            </Typography>
+          {pdi.ciudad && ( <Divider sx={{ my: 1 }} /> )}
+          <Typography variant="body1" align="left" sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
+            <strong>Dirección:</strong> {pdi.direccion}
+          </Typography>
+          <Divider sx={{ my: 1 }} />
+          <Typography variant="body1" align="left" sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
+            <strong>Categoría:</strong> {pdi.categoria}
+          </Typography>
+          <Divider sx={{ my: 1 }} />
+          <Typography variant="body1" align="left" sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
+            <strong>Descripción:</strong> {pdi.descripcion}
+          </Typography>
         </Grid>
       </Grid>
     </Box>

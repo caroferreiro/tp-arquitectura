@@ -15,11 +15,11 @@ export default class CodigoAdminPage extends Component {
           <Typography
             variant="h3"
             compact="h3"
-            sx={{ marginBottom: 2, fontWeight: 900 }} 
+            style={{ fontFamily: 'Poppins', fontWeight: 600 }}
           >
             Tu punto de interés está siendo revisado
           </Typography>
-          <CheckCircleIcon sx={{ width: 100, height: 100, color: "#27ae60", marginY: 2 }} />
+          <CheckCircleIcon sx={{ width: 100, height: 100, color: "#27ae60", marginY: 4 }} />
         </Grid>
         <Grid item xs={12} align="center">
           <Button 
@@ -27,7 +27,7 @@ export default class CodigoAdminPage extends Component {
             color="secondary" 
             component={Link} 
             to="/mapa-usuario"
-            sx={{ marginTop: 4 }} 
+            sx={{ marginTop: 4, fontFamily: 'Poppins', fontWeight: 400 }} 
             >
             Volver al inicio
           </Button>

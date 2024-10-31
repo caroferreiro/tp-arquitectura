@@ -94,18 +94,18 @@ export default function ListaPDIsPage() {
           variant="h3" 
           component="h3"
           align="center"
-          sx={{ fontWeight: 700, marginBottom: 4}}>
+          sx={{ fontFamily: 'Poppins', fontWeight: 700, marginBottom: 4}}>
           Puntos de interés pendientes de revisión
         </Typography>
       </Grid>
       {error && (
         <Grid item xs={12} align="center">
-          <Typography color="error">{error}</Typography>
+          <Typography color="error">{error} sx={{ fontFamily: 'Poppins', fontWeight: 400, fontSize: 15 }}</Typography>
         </Grid>
       )}
       {successMessage && (
         <Grid item xs={12} align="center">
-          <Typography color="primary">{successMessage}</Typography>
+          <Typography color="primary" sx={{ fontFamily: 'Poppins', fontWeight: 400, fontSize: 15 }}>{successMessage}</Typography>
         </Grid>
       )}
      <Grid item xs={12} align="center">
@@ -114,20 +114,20 @@ export default function ListaPDIsPage() {
             {pdis.map((pdi) => (
               <ListItem key={pdi.id} divider>
                 <Box sx={{ flexGrow: 1 }}>
-                  <Typography variant="h6" color="secondary" component="div" sx={{ textTransform: 'uppercase' }}>
-                    <strong>{pdi.nombre}</strong>
+                  <Typography variant="h6" color="secondary" component="div" sx={{ fontFamily: 'Poppins', fontWeight: 800, fontSize: 28, textTransform: 'uppercase' }}>
+                    {pdi.nombre}
                   </Typography>
                   <br/>
-                  <Typography variant="body1">
+                  <Typography variant="body1" sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
                     <strong>Ciudad:</strong> {pdi.ciudad}
                   </Typography>
-                  <Typography variant="body1">
+                  <Typography variant="body1" sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
                     <strong>Dirección:</strong> {pdi.direccion}
                   </Typography>
-                  <Typography variant="body1">
+                  <Typography variant="body1" sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
                     <strong>Categoría:</strong> {pdi.categoria}
                   </Typography>
-                  <Typography variant="body1">
+                  <Typography variant="body1" sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
                     <strong>Descripción:</strong> {pdi.descripcion}
                   </Typography>
                 </Box>
@@ -145,12 +145,12 @@ export default function ListaPDIsPage() {
         </div>
       </Grid>
       <Grid item xs={12} align="center">
-        <Button variant="contained" color="primary" onClick={fetchPDIs}>
+        <Button variant="contained" color="primary" onClick={fetchPDIs} sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
           Refrescar lista
         </Button>
       </Grid>
       <Grid item xs={12} align="center">
-        <Button variant="outlined" color="secondary" to="/mapa-admin" component={Link}>
+        <Button variant="outlined" color="secondary" to="/mapa-admin" component={Link} sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
           Volver al inicio
         </Button>
       </Grid>

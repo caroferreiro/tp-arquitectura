@@ -39,16 +39,17 @@ const UserMarkers = () => {
       {PDIs.map((PDI) => (
         <Marker key={PDI.id} position={[PDI.latitud, PDI.longitud]} icon={customIcon}>
           <Popup>
-            <strong>{PDI.nombre}</strong>
+            <strong style={{ fontFamily: 'Poppins', fontWeight: 600, align: 'center' }}>{PDI.nombre}</strong>
             <br />
             <br />
             <div style={{ textAlign: 'center' }}>
               <Link 
                 to={`/pdi/${PDI.id}`} 
                 style={{
+                  fontFamily: 'Poppins',
+                  fontWeight: 300,
                   textDecoration: 'underline',
                   color: 'primary',
-                  fontWeight: 'bold' 
                 }}>
                 Ver info
               </Link>

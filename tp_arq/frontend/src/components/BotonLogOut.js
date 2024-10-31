@@ -60,17 +60,17 @@ const BotonLogOut = () => {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <DialogTitle id="alert-dialog-title">{"¿Estás seguro que querés salir?"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title" sx={{ fontFamily: 'Poppins', fontWeight: 600, fontSize: 20 }}>{"¿Estás seguro que querés salir?"}</DialogTitle>
             <DialogContent>
-            <DialogContentText id="alert-dialog-description">
+            <DialogContentText id="alert-dialog-description" sx={{ fontFamily: 'Poppins', fontWeight: 400, fontSize: 15 }} >
                 Al salir cerrarás tu sesión actual.
             </DialogContentText>
             </DialogContent>
             <DialogActions>
-            <Button onClick={handleCloseDialog} color="secondary">
+            <Button onClick={handleCloseDialog} color="secondary" sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
                 Atrás
             </Button>
-            <Button onClick={handleLogout} color="primary" autoFocus>
+            <Button onClick={handleLogout} color="primary" autoFocus sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
                 Salir
             </Button>
             </DialogActions>

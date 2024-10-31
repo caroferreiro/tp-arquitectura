@@ -66,7 +66,7 @@ export default function CodigoAdminPage() {
         <Typography
           variant="h3"
           compact="h3"
-          sx={{ marginBottom: 6, fontWeight: 900 }} 
+          sx={{ marginBottom: 6, fontFamily: 'Poppins', fontWeight: 700, fontSize: 40 }} 
         >
           Ingresá tu mail y el código para validarte como administrador
         </Typography>
@@ -98,12 +98,12 @@ export default function CodigoAdminPage() {
         />
       </Grid>
       <Grid item xs={12} align="center">
-        <Button variant="contained" color="primary" onClick={adminButtonPressed}>
+        <Button variant="contained" color="primary" onClick={adminButtonPressed} sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
           Ingresar
         </Button>
       </Grid>
       <Grid item xs={12} align="center">
-        <Button variant="outlined" color="secondary" component={Link} to="/">
+        <Button variant="outlined" color="secondary" component={Link} to="/" sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
           Atrás
         </Button>
       </Grid>

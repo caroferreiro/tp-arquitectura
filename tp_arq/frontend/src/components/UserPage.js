@@ -25,7 +25,7 @@ export default class UserPage extends Component {
           <Typography
             variant="h1" 
             align="center"
-            sx={{ fontWeight: 900, fontSize: '8rem' }}
+            sx={{ fontFamily: 'Poppins', fontWeight: 700, fontSize: 120 }}
           >
             #DescubríNQN
           </Typography>
@@ -38,6 +38,7 @@ export default class UserPage extends Component {
               size="large"
               component={Link}
               to="/mapa-usuario"
+              sx={{ fontFamily: 'Poppins', fontWeight: 400 }}
             >
               Soy usuario
             </Button>
@@ -47,6 +48,7 @@ export default class UserPage extends Component {
               size="large"
               component={Link}
               to="/validar-administrador"
+              sx={{ fontFamily: 'Poppins', fontWeight: 400 }}
             >
               Soy administrador
             </Button>

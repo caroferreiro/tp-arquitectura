@@ -14,7 +14,7 @@ export default class AgregarPDIPage extends Component {
         <Typography
           variant="h3"
           compact="h3"
-          sx={{ marginBottom: 6, fontWeight: 900 }} 
+          sx={{ fontFamily: 'Poppins', fontWeight: 700, marginBottom: 6 }} 
         >
           ¿Qué deseás añadir?
         </Typography>
@@ -28,7 +28,7 @@ export default class AgregarPDIPage extends Component {
                 size="large"
                 component={Link}
                 to="/agregarEvento"
-                sx={{ padding: '16px 32px', fontSize: '1.5rem' }}
+                sx={{ padding: '16px 32px', fontFamily: 'Poppins', fontWeight: 500, fontSize: 25 }}
               >
                 Evento
               </Button>
@@ -40,7 +40,7 @@ export default class AgregarPDIPage extends Component {
                 size="large"
                 component={Link}
                 to="/agregarEstablecimiento"
-                sx={{ padding: '16px 32px', fontSize: '1.5rem' }}
+                sx={{ padding: '16px 32px', fontFamily: 'Poppins', fontWeight: 500, fontSize: 25}}
               >
                 Establecimiento
               </Button>
@@ -54,7 +54,7 @@ export default class AgregarPDIPage extends Component {
             color="secondary" 
             component={Link} 
             to="/mapa-usuario"
-            sx={{ marginTop: 4 }} 
+            sx={{ marginTop: 4, fontFamily: 'Poppins', fontWeight: 400 }} 
             >
             Volver al inicio
           </Button>

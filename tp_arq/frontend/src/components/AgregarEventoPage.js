@@ -92,7 +92,7 @@ export default function AgregarEventoPage() {
         <Typography
           variant="h3"
           compact="h3"
-          sx={{ marginBottom: 4, fontWeight: 900 }} 
+          sx={{ marginBottom: 4, fontFamily: 'Poppins', fontWeight: 700 }}
         >
           Nuevo evento
         </Typography>
@@ -190,7 +190,7 @@ export default function AgregarEventoPage() {
           </Grid>
         </Grid>
         <Grid item xs={12} align="center">
-          <Button variant="outlined" onClick={() => setMostrarMapa(!mostrarMapa)}>
+          <Button variant="outlined" onClick={() => setMostrarMapa(!mostrarMapa)} sx={{fontFamily: 'Poppins', fontWeight: 600}}>
             {mostrarMapa ? "Ocultar Mapa" : "Seleccionar ubicación en el mapa"}
           </Button>
         </Grid>
@@ -207,7 +207,7 @@ export default function AgregarEventoPage() {
           </Grid>
         )}
         <Grid item xs={12} align="center">
-          <Button variant="outlined" component="label">
+          <Button variant="outlined" component="label" sx={{fontFamily: 'Poppins', fontWeight: 600}}>
             Cargar Imágenes
             <input
               type="file"
@@ -231,12 +231,12 @@ export default function AgregarEventoPage() {
           {error && <Typography color="error">{error}</Typography>}
         </Grid>
         <Grid item spacing={1} xs={12} align="center">
-          <Button variant="contained" color="primary" onClick={solicitarEventoButton}>
+          <Button variant="contained" color="primary" onClick={solicitarEventoButton} sx={{fontFamily: 'Poppins', fontWeight: 400}}>
             Solicitar nuevo evento
           </Button>
         </Grid>
         <Grid item xs={12} align="center">
-          <Button variant="outlined" color="secondary" to="/agregarPDI" component={Link}>
+          <Button variant="outlined" color="secondary" to="/agregarPDI" component={Link} sx={{fontFamily: 'Poppins', fontWeight: 400}}>
             Atrás
           </Button>
         </Grid>
