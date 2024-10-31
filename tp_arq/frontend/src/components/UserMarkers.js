@@ -47,7 +47,7 @@ const UserMarkers = () => {
                 to={`/pdi/${PDI.id}`} 
                 style={{
                   fontFamily: 'Poppins',
-                  fontWeight: 300,
+                  fontWeight: 400,
                   textDecoration: 'underline',
                   color: 'primary',
                 }}>
