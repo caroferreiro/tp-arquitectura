@@ -40,7 +40,7 @@ class PDI(models.Model):
 class Evento(PDI):
     fecha = models.DateField(null=False)
     horaInicio = models.TimeField(null=False)
-    horaFin = models.TimeField(null=False)
+    horaFin = models.TimeField(null=True)
 
 class Establecimiento(PDI):
     pass
