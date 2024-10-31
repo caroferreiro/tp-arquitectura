@@ -114,7 +114,7 @@ export default function ListaPDIsPage() {
             {pdis.map((pdi) => (
               <ListItem key={pdi.id} divider>
                 <Box sx={{ flexGrow: 1 }}>
-                  <Typography variant="h6" color="secondary" component="div" sx={{ fontFamily: 'Poppins', fontWeight: 800, fontSize: 28, textTransform: 'uppercase' }}>
+                  <Typography variant="h6" color="secondary" component="div" sx={{ fontFamily: 'Poppins', fontWeight: 600, fontSize: 28, textTransform: 'uppercase' }}>
                     {pdi.nombre}
                   </Typography>
                   <br/>
