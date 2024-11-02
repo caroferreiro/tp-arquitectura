@@ -29,16 +29,20 @@ class PDISerializer(serializers.ModelSerializer):
 
 
 class EventoSerializer(serializers.ModelSerializer):
+    imagenes = ImagenSerializer(many=True, read_only=True)
+
     class Meta:
         model = Evento
         fields = ('id', 'nombre', 'ciudad', 'direccion', 'categoria', 
-                  'descripcion', 'latitud', 'longitud', 'estado', 'fecha', 'horaInicio', 'horaFin')
+                  'descripcion', 'latitud', 'longitud', 'estado', 'fecha', 'horaInicio', 'horaFin', 'imagenes')
 
 class EstablecimientoSerializer(serializers.ModelSerializer):
+    imagenes = ImagenSerializer(many=True, read_only=True)
+
     class Meta:
         model = Establecimiento
         fields = ('id', 'nombre', 'ciudad', 'direccion', 'categoria',
-                  'descripcion', 'latitud', 'longitud', 'estado')
+                  'descripcion', 'latitud', 'longitud', 'estado', 'imagenes')
 
 class CreateEventoSerializer(serializers.ModelSerializer):
     class Meta:

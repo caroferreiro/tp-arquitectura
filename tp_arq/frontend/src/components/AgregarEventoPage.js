@@ -53,6 +53,20 @@ export default function AgregarEventoPage() {
       formData.append(`imagenes[${index}]`, imagen);
     });
 
+    console.log("Datos enviados al backend:", {
+      nombre,
+      ciudad,
+      direccion,
+      categoria,
+      descripcion,
+      latitud: parseFloat(latitud),
+      longitud: parseFloat(longitud),
+      fecha,
+      horaInicio,
+      horaFin,
+      imagenes: imagenes.map(image => image.name) // Mostrar solo los nombres de las imágenes
+    });
+
     fetch("/api/agregar-evento", {
       method: "POST",
       body: formData,

@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .gestorPDI import GestorPDI
 from .gestorAdmin import GestorAdmin
+from .models import Evento, Establecimiento
 
 gestor_puntos = GestorPDI()
 gestor_admin = GestorAdmin()
@@ -134,12 +135,19 @@ class TraerPDIs(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class BuscarPDI(APIView):
-    serializer_class = PDISerializer
 
     def get(self, request, format=None):
         id = request.query_params.get('id')
         pdi = gestor_puntos.buscarPDI(id=id)
 
-        serializer = self.serializer_class(pdi, many=False, context={'request': request})
-
+        if pdi is None:
+            return Response({'message': 'PDI no encontrado'}, status=status.HTTP_404_NOT_FOUND)
+        
+        if isinstance(pdi, Evento):
+            serializer = EventoSerializer(pdi, context={'request': request})
+        elif isinstance(pdi, Establecimiento):
+            serializer = EstablecimientoSerializer(pdi, context={'request': request})
+        else:
+            serializer = PDISerializer(pdi, context={'request': request})
+        
         return Response(serializer.data, status=status.HTTP_200_OK)

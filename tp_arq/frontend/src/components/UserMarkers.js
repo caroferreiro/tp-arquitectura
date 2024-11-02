@@ -4,16 +4,26 @@ import { Link } from "react-router-dom";
 import L from "leaflet"; // Importa Leaflet directamente
 import "leaflet/dist/leaflet.css"; // Importa el CSS de Leaflet
 import blueMarker from "./icons/blue_marker.png"; 
+import purpleMarker from "./icons/purple_marker.png"; 
 
 delete L.Icon.Default.prototype._getIconUrl;
 
-const customIcon = new L.Icon({
+const blueIcon = new L.Icon({
     iconUrl: blueMarker, 
     shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
     iconSize: [50, 50],
     iconAnchor: [12, 41],
     popupAnchor: [12, -34],
     shadowSize: [80, 50],
+});
+
+const purpleIcon = new L.Icon({
+  iconUrl: purpleMarker, 
+  shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
+  iconSize: [50, 50],
+  iconAnchor: [12, 41],
+  popupAnchor: [12, -34],
+  shadowSize: [80, 50],
 });
 
 const UserMarkers = () => {
@@ -37,7 +47,11 @@ const UserMarkers = () => {
   return (
     <>
       {PDIs.map((PDI) => (
-        <Marker key={PDI.id} position={[PDI.latitud, PDI.longitud]} icon={customIcon}>
+          <Marker 
+          key={PDI.id} 
+          position={[PDI.latitud, PDI.longitud]} 
+          icon={PDI.fecha ? blueIcon : purpleIcon} 
+          >
           <Popup>
             <strong style={{ fontFamily: 'Poppins', fontWeight: 600, align: 'center' }}>{PDI.nombre}</strong>
             <br />

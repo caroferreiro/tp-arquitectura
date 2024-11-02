@@ -52,5 +52,14 @@ class GestorPDI:
         return PDI.objects.all()
     
     def buscarPDI(self, id):
-        return PDI.objects.get(id=id)
+        try:
+            # Intentar encontrar un Evento con el ID
+            return Evento.objects.get(id=id)
+        except Evento.DoesNotExist:
+            try:
+                # Si no es un Evento, intentar con Establecimiento
+                return Establecimiento.objects.get(id=id)
+            except Establecimiento.DoesNotExist:
+                # Si tampoco es Establecimiento, retornar None
+                return None
         

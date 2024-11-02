@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Grid2 as Grid, Typography, Box, Divider } from "@mui/material";
+import { Grid2 as Grid, Typography, Box, Divider, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const InfoPDI = () => {
   const { id } = useParams();
@@ -77,6 +78,36 @@ const InfoPDI = () => {
           <Typography variant="body1" align="left" sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
             <strong>Descripción:</strong> {pdi.descripcion}
           </Typography>
+          <Divider sx={{ my: 1 }} />
+
+       
+          {pdi.fecha && pdi.horaInicio && pdi.horaFin && (
+            <>
+              <Typography variant="body1" align="left" sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
+                <strong>Fecha:</strong> {pdi.fecha}
+              </Typography>
+              <Divider sx={{ my: 1 }} />
+              <Typography variant="body1" align="left" sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
+                <strong>Hora de Inicio:</strong> {pdi.horaInicio}
+              </Typography>
+              <Divider sx={{ my: 1 }} />
+              <Typography variant="body1" align="left" sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
+                <strong>Hora de Finalización:</strong> {pdi.horaFin}
+              </Typography>
+              <Divider sx={{ my: 1 }} />
+            </>
+          )}
+        </Grid>
+        <Grid item xs={12} align="center">  
+          <Button 
+            variant="outlined" 
+            color="secondary" 
+            component={Link} 
+            to="/mapa-usuario"
+            sx={{ marginTop: 4, fontFamily: 'Poppins', fontWeight: 400 }} 
+            >
+            Volver al inicio
+          </Button>
         </Grid>
       </Grid>
     </Box>
