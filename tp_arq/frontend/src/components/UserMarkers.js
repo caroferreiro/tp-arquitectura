@@ -76,7 +76,7 @@ const cineIcon = new L.Icon({
   shadowSize: [80, 50],
 });
 
-const UserMarkers = () => {
+const UserMarkers = ({ categoriaSeleccionada }) => {
   const [PDIs, setPDIs] = useState([]);
 
   useEffect(() => {
@@ -84,15 +84,20 @@ const UserMarkers = () => {
       try {
         const response = await fetch("/api/traer-pdis?estado=True");
         const data = await response.json();
-        setPDIs(data);
-        console.log(data); // Verificar los datos
+
+        // Filtrar PDIs según la categoría seleccionada
+        const pdisFiltrados = categoriaSeleccionada 
+          ? data.filter(PDI => PDI.categoria === categoriaSeleccionada) 
+          : data; // Si no hay categoría seleccionada, mostrar todos
+        
+        setPDIs(pdisFiltrados);
       } catch (error) {
         console.error("Error al obtener los PDIs:", error);
       }
     };
 
     obtenerPDIs();
-  }, []);
+  }, [categoriaSeleccionada]);
 
   const obtenerIconoPorCategoria = (categoria) => {
     switch (categoria) {
