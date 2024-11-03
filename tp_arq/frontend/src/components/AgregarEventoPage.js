@@ -132,11 +132,12 @@ export default function AgregarEventoPage() {
               label="Categoría"
             >
               <MenuItem value="Gastronomía">Gastronomía</MenuItem>
-              <MenuItem value="Entretenimiento">Entretenimiento</MenuItem>
-              <MenuItem value="Aire libre">Aire libre</MenuItem>
-              <MenuItem value="Música">Música</MenuItem>
+              <MenuItem value="Cultura">Cultura</MenuItem>
+              <MenuItem value="Naturaleza">Naturaleza</MenuItem>
+              <MenuItem value="Arte">Arte</MenuItem>
               <MenuItem value="Cine">Cine</MenuItem>
-              <MenuItem value="Artesanías">Artesanías</MenuItem>
+              <MenuItem value="Deporte">Deporte</MenuItem>
+              <MenuItem value="Música">Música</MenuItem>
             </Select>
           </FormControl>
         </Grid>

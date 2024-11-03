@@ -21,11 +21,12 @@ class Administrador(models.Model):
 class PDI(models.Model):
     categorias = [
         ('Gastronomía', 'Gastronomía'),
-        ('Entretenimiento', 'Entretenimiento'),
-        ('Aire libre', 'Aire libre'),
+        ('Cultura', 'Cultura'),
+        ('Naturaleza', 'Naturaleza'),
         ('Música', 'Música'),
         ('Cine', 'Cine'),
-        ('Artesanías', 'Artesanías')
+        ('Arte', 'Arte'),
+        ('Deporte', 'Deporte')
     ]
     id = models.CharField(max_length=8, default=generate_unique_id, unique=True, primary_key=True)
     nombre = models.CharField(max_length=50, null=False, unique=False)
