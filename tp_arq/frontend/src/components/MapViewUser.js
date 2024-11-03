@@ -3,13 +3,14 @@ import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css"; 
 import UserMarkers from "./UserMarkers";
 import BotonAgregarPDI from "./BotonAgregarPDI";
-
+import BotonLogOut from "./BotonLogOut";
 
 
 const MapViewUser = () => {
 
     return (
         <div>
+            <BotonLogOut />
             <MapContainer 
                 center={[-38.95231561788808, -68.05600596781214]} 
                 zoom={10} 

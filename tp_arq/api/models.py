@@ -1,4 +1,4 @@
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator, MinLengthValidator
 from django.utils.translation import gettext_lazy as _
 from django.db import models
 import random
@@ -15,6 +15,11 @@ def generate_unique_id():
     return id
 
 # Create your models here.
+class Usuario(models.Model):
+    mail = models.EmailField(max_length=50, unique=True, default='')
+    contraseña = models.CharField(max_length=50, null=False, unique=False, validators=[MinLengthValidator(8)])
+
+
 class Administrador(models.Model):
     mail = models.EmailField(max_length=50, unique=True, default='')
 

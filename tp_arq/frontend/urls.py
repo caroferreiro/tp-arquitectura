@@ -12,5 +12,7 @@ urlpatterns = [
     path('revision', index),
     path('listar-pendientes', index),
     path('seleccionar-punto', index),
-    path('pdi/<str:id>', index)
+    path('pdi/<str:id>', index),
+    path('iniciar-sesion', index),
+    path('registrarse', index),
 ]

@@ -11,6 +11,8 @@ import RevisionPage from "./RevisionPage";
 import EvaluarPDIsPage from "./EvaluarPDIsPage";
 import InfoPDI from "./InfoPDI";
 import SeleccionarPunto from "./SeleccionarPunto";
+import IniciarSesion from "./IniciarSesion";
+import RegistroUsuario from "./RegistroUsuario";
 import backgroundImage from './images/fondo.jpg';
 
 export default class UserPage extends Component {
@@ -37,7 +39,7 @@ export default class UserPage extends Component {
               variant="contained"
               size="large"
               component={Link}
-              to="/mapa-usuario"
+              to="/registrarse"
               sx={{ fontFamily: 'Poppins', fontWeight: 400 }}
             >
               Soy usuario
@@ -109,6 +111,8 @@ export default class UserPage extends Component {
             <Route path="/listar-pendientes" element={<EvaluarPDIsPage />} />
             <Route path="/seleccionar-punto" element={<SeleccionarPunto />} />
             <Route path="/pdi/:id" element={<InfoPDI />} />
+            <Route path="/iniciar-sesion" element={<IniciarSesion />} />
+            <Route path="/registrarse" element={<RegistroUsuario />} />
           </Routes>
         </Router>
     ); 

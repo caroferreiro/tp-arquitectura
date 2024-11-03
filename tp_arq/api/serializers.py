@@ -1,6 +1,11 @@
 from rest_framework import serializers
-from .models import Administrador, PDI, Evento, Establecimiento, Imagen
+from .models import Usuario, Administrador, PDI, Evento, Establecimiento, Imagen
 
+
+class UsuarioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Usuario
+        fields = ('mail', 'contraseña')
 
 class AdminSerializer(serializers.ModelSerializer):
     class Meta:

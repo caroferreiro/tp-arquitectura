@@ -89,6 +89,7 @@ export default function CodigoAdminPage() {
           error={!!errorCode} // Muestra error si hay un error en el código
           label="Código"
           placeholder="Ingresá el código"
+          type="password"
           value={code}
           helperText={errorCode} // Muestra el error de código
           variant="outlined"

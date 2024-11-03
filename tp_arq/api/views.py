@@ -1,15 +1,55 @@
 from django.shortcuts import render
 from rest_framework import generics, status
-from .serializers import AdminSerializer, PDISerializer, EventoSerializer, EstablecimientoSerializer, CreateEventoSerializer, CreateEstablecimientoSerializer, UpdatePDISerializer, ImagenSerializer, CreateImagenSerializer
+from .serializers import AdminSerializer, PDISerializer, EventoSerializer, EstablecimientoSerializer, CreateEventoSerializer, CreateEstablecimientoSerializer, UpdatePDISerializer, UsuarioSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .gestorPDI import GestorPDI
 from .gestorAdmin import GestorAdmin
+from .gestorUsuario import GestorUsuario
 from .models import Evento, Establecimiento
 
 gestor_puntos = GestorPDI()
 gestor_admin = GestorAdmin()
+gestor_usuario = GestorUsuario()
 
+class AgregarUsuario(APIView):
+    serializer_class = UsuarioSerializer
+    
+    def post(self, request, format=None):
+        serializer = self.serializer_class(data=request.data)
+
+        mail = request.data.get('mail')
+        contraseña = request.data.get('contraseña')
+
+        if gestor_usuario.existeUsuario(mail):
+            return Response({'message': 'Ya existe un usuario con este mail.'}, status=status.HTTP_403_FORBIDDEN)
+
+        if serializer.is_valid():
+            nuevo_usuario = gestor_usuario.agregarUsuario(mail=mail, contraseña=contraseña)
+            return Response(UsuarioSerializer(nuevo_usuario).data, status=status.HTTP_201_CREATED)
+        
+        return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+    
+class VerificarUsuario(APIView):
+    serializer_class = UsuarioSerializer
+    
+    def post(self, request, format=None):
+        serializer = self.serializer_class(data=request.data)
+
+        mail = request.data.get('mail')
+        contraseña = request.data.get('contraseña')
+        
+        usuario = gestor_usuario.obtenerUsuario(mail)
+        # Verificar si el usuario existe
+        if not usuario:
+            return Response({'message': 'Usuario no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Verificar la contraseña
+        if not gestor_usuario.verificarContraseña(usuario, contraseña):
+            return Response({'message': 'Contraseña incorrecta.'}, status=status.HTTP_403_FORBIDDEN)
+        
+        return Response({'message': 'Usuario verificado correctamente.'}, status=status.HTTP_200_OK)
+    
 class AgregarAdmin(APIView):
     serializer_class = AdminSerializer
     
