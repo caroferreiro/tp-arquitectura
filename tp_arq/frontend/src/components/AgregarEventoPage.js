@@ -37,6 +37,17 @@ export default function AgregarEventoPage() {
   };
 
   const solicitarEventoButton = () => {
+    
+    if (!nombre || !categoria || !descripcion || !fecha || !horaInicio || !horaFin) {
+      setError("Por favor, completa todos los campos obligatorios.");
+      return;
+    }
+
+    if (!latitud || !longitud || !direccion) {
+      setError("Por favor, selecciona la ubicación del evento en en mapa.");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("nombre", nombre);
     formData.append("ciudad", ciudad);
@@ -77,15 +88,10 @@ export default function AgregarEventoPage() {
         } else if (response.status === 409) {
           setError("El evento ya existe.");
         } else {
-          console.log(`Error: ${response.status} - ${response.statusText}`);
-          return response.json().then((data) => {
-            setError("Ocurrió un error al agregar el evento.");
-            console.log("Detalles del error:", data);
-          });
+          setError("Ocurrió un error al agregar el evento.");
         }
       })
       .catch((error) => {
-        console.log("Error de red o de servidor:", error);
         setError("Intentalo nuevamente.");
       });
   };
@@ -114,7 +120,7 @@ export default function AgregarEventoPage() {
         <Grid item xs={12} align="center">
           <TextField
             name="nombre"
-            label="Nombre"
+            label="Nombre *"
             placeholder="Ingresa el nombre del evento"
             value={nombre}
             variant="outlined"
@@ -124,12 +130,12 @@ export default function AgregarEventoPage() {
         </Grid>
         <Grid item xs={12} align="center">
           <FormControl fullWidth variant="outlined">
-            <InputLabel id="categoria-label">Categoría</InputLabel>
+            <InputLabel id="categoria-label">Categoría *</InputLabel>
             <Select
               labelId="categoria-label"
               value={categoria}
               onChange={handleCategoriaChange}
-              label="Categoría"
+              label="Categoría *"
             >
               <MenuItem value="Gastronomía">Gastronomía</MenuItem>
               <MenuItem value="Cultura">Cultura</MenuItem>
@@ -144,7 +150,7 @@ export default function AgregarEventoPage() {
         <Grid item xs={12} align="center">
           <TextField
             name="descripcion"
-            label="Descripción"
+            label="Descripción *"
             placeholder="Ingresa una descripción del evento"
             value={descripcion}
             variant="outlined"
@@ -158,7 +164,7 @@ export default function AgregarEventoPage() {
           <Grid item xs={4}>
             <TextField
               name="fecha"
-              label="Fecha"
+              label="Fecha *"
               type="date"
               value={fecha}
               variant="outlined"
@@ -174,7 +180,7 @@ export default function AgregarEventoPage() {
           <Grid item xs={4}>
             <TextField
               name="horaInicio"
-              label="Incio"
+              label="Incio *"
               type="time"
               value={horaInicio}
               variant="outlined"
@@ -190,7 +196,7 @@ export default function AgregarEventoPage() {
           <Grid item xs={4}>
             <TextField
               name="horaFin"
-              label="Fin"
+              label="Fin (*)"
               type="time"
               value={horaFin}
               variant="outlined"
@@ -206,7 +212,7 @@ export default function AgregarEventoPage() {
         </Grid>
         <Grid item xs={12} align="center">
           <Button variant="outlined" onClick={() => setMostrarMapa(!mostrarMapa)} sx={{fontFamily: 'Poppins', fontWeight: 600}}>
-            {mostrarMapa ? "Ocultar Mapa" : "Seleccionar ubicación en el mapa"}
+            {mostrarMapa ? "Ocultar Mapa" : "Seleccionar ubicación en el mapa *"}
           </Button>
         </Grid>
         {mostrarMapa && (
@@ -243,7 +249,7 @@ export default function AgregarEventoPage() {
           )}
         </Grid>
         <Grid item xs={12} align="center">
-          {error && <Typography color="error">{error}</Typography>}
+          {error && <Typography color="error" sx={{ fontFamily: 'Poppins', fontWeight: 400, fontSize: 15 }}>{error}</Typography>}
         </Grid>
         <Grid item spacing={1} xs={12} align="center">
           <Button variant="contained" color="primary" onClick={solicitarEventoButton} sx={{fontFamily: 'Poppins', fontWeight: 400}}>

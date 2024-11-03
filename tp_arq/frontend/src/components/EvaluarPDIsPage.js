@@ -100,7 +100,7 @@ export default function ListaPDIsPage() {
       </Grid>
       {error && (
         <Grid item xs={12} align="center">
-          <Typography color="error">{error} sx={{ fontFamily: 'Poppins', fontWeight: 400, fontSize: 15 }}</Typography>
+          <Typography color="error" sx={{ fontFamily: 'Poppins', fontWeight: 400, fontSize: 15 }}>{error}</Typography>
         </Grid>
       )}
       {successMessage && (
