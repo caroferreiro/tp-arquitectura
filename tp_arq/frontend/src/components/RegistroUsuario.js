@@ -12,7 +12,7 @@ export default function RegistroUsuario() {
     setError("");
 
     if (!mail || !contraseña) {
-        setErrorCode("Por favor, completa todos los campos.");
+        setErrorCode("Por favor, completá todos los campos.");
         return;
     }
 
@@ -32,11 +32,11 @@ export default function RegistroUsuario() {
         if (response.ok) {
           navigate(`/mapa-usuario`);
         } else {
-            setError("Mail o contraseña incorrectos."); 
+            setError("Mail en uso"); 
         }
       })
       .catch((error) => {
-        setError("Intentalo nuevamente."); 
+        setError("Intentalo nuevamente"); 
       });
   };
 
@@ -99,7 +99,7 @@ export default function RegistroUsuario() {
             textTransform: "none"
           }}
         >
-          ¿Ya tienes una cuenta?
+          ¿Ya tenés una cuenta?
         </Button>
       </Grid>
     </Grid>

@@ -40,26 +40,38 @@ const MapViewUser = () => {
                 <UserMarkers categoriaSeleccionada={categoriaSeleccionada} />
                 <div style={{ position: "absolute", top: 10, left: 80, zIndex: 1000 }}>
                     <FormControl sx={{ minWidth: 200 }} variant="outlined">
-                        <InputLabel id="categoria-select-label">Categoría</InputLabel>
+                        <InputLabel 
+                            id="categoria-select-label"
+                            sx={{ fontFamily: 'Poppins' }}
+                            >Categoría
+                        </InputLabel>
                         <Select
                             labelId="categoria-select-label"
                             value={categoriaSeleccionada}
                             onChange={handleCategoriaChange}
-                            style={{ backgroundColor: 'white', fontSize: '1.2rem' }} // Cambia el fondo y el tamaño de la fuente
+                            sx={{
+                                backgroundColor: 'white',
+                                fontSize: '1.2rem',
+                                '.MuiSelect-select': {
+                                    fontSize: '0.9rem', 
+                                    fontFamily: 'Poppins', 
+                                },
+                            }}
                             MenuProps={{
                                 PaperProps: {
                                     style: {
                                         maxHeight: 300,
-                                        fontSize: '1rem', // Cambiar el tamaño de la fuente del menú
+                                        fontSize: '1rem',
+                                        fontFamily: 'Poppins',
                                     },
                                 },
                             }}
                         >
-                            <MenuItem value="">
+                            <MenuItem value="" sx={{ fontFamily: 'Poppins' }}>
                                 <em>Todas</em>
                             </MenuItem>
                             {categorias.map((categoria) => (
-                                <MenuItem key={categoria} value={categoria}>
+                                <MenuItem key={categoria} value={categoria} sx={{ fontFamily: 'Poppins' }}>
                                     {categoria}
                                 </MenuItem>
                             ))}
