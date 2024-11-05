@@ -126,24 +126,36 @@ export default function AgregarEventoPage() {
             variant="outlined"
             onChange={(e) => setNombre(e.target.value)}
             fullWidth
+            sx={{ 
+              fontSize: '1rem', 
+              fontFamily: 'Poppins',
+              '& .MuiInputBase-input': {
+                  fontFamily: 'Poppins',
+                  fontSize: '1rem',
+              },
+              '& .MuiInputLabel-root': {
+                  fontFamily: 'Poppins',
+                  fontSize: '1rem',
+              } 
+            }}
           />
         </Grid>
         <Grid item xs={12} align="center">
           <FormControl fullWidth variant="outlined">
-            <InputLabel id="categoria-label">Categoría *</InputLabel>
+            <InputLabel id="categoria-label" sx={{ fontFamily: 'Poppins', fontSize: '1rem' }}>Categoría *</InputLabel>
             <Select
               labelId="categoria-label"
               value={categoria}
               onChange={handleCategoriaChange}
               label="Categoría *"
             >
-              <MenuItem value="Gastronomía">Gastronomía</MenuItem>
-              <MenuItem value="Cultura">Cultura</MenuItem>
-              <MenuItem value="Naturaleza">Naturaleza</MenuItem>
-              <MenuItem value="Arte">Arte</MenuItem>
-              <MenuItem value="Cine">Cine</MenuItem>
-              <MenuItem value="Deporte">Deporte</MenuItem>
-              <MenuItem value="Música">Música</MenuItem>
+              <MenuItem value="Gastronomía" sx={{ fontFamily: 'Poppins', fontSize: '1rem' }}>Gastronomía</MenuItem>
+              <MenuItem value="Cultura" sx={{ fontFamily: 'Poppins', fontSize: '1rem' }}>Cultura</MenuItem>
+              <MenuItem value="Naturaleza" sx={{ fontFamily: 'Poppins', fontSize: '1rem' }}>Naturaleza</MenuItem>
+              <MenuItem value="Arte" sx={{ fontFamily: 'Poppins', fontSize: '1rem' }}>Arte</MenuItem>
+              <MenuItem value="Cine" sx={{ fontFamily: 'Poppins', fontSize: '1rem' }}>Cine</MenuItem>
+              <MenuItem value="Deporte" sx={{ fontFamily: 'Poppins', fontSize: '1rem' }}>Deporte</MenuItem>
+              <MenuItem value="Música" sx={{ fontFamily: 'Poppins', fontSize: '1rem' }}>Música</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -158,6 +170,18 @@ export default function AgregarEventoPage() {
             fullWidth
             multiline
             rows={4}
+            sx={{ 
+              fontSize: '1rem', 
+              fontFamily: 'Poppins',
+              '& .MuiInputBase-input': {
+                  fontFamily: 'Poppins',
+                  fontSize: '1rem',
+              },
+              '& .MuiInputLabel-root': {
+                  fontFamily: 'Poppins',
+                  fontSize: '1rem',
+              } 
+            }}
           />
         </Grid>
         <Grid container spacing={1} justifyContent="center">
@@ -173,6 +197,13 @@ export default function AgregarEventoPage() {
               slotProps={{
                 inputLabel: {
                   shrink: true,
+                },
+              }}
+              sx={{ 
+                fontSize: '1rem', 
+                fontFamily: 'Poppins',
+                '& input': {
+                  fontFamily: 'Poppins',
                 },
               }}
             />
@@ -191,6 +222,13 @@ export default function AgregarEventoPage() {
                   shrink: true,
                 },
               }}
+              sx={{ 
+                fontSize: '1rem', 
+                fontFamily: 'Poppins',
+                '& input': {
+                  fontFamily: 'Poppins',
+                },
+              }}
             />
           </Grid>
           <Grid item xs={4}>
@@ -205,6 +243,13 @@ export default function AgregarEventoPage() {
               slotProps={{
                 inputLabel: {
                   shrink: true,
+                },
+              }}
+              sx={{ 
+                fontSize: '1rem', 
+                fontFamily: 'Poppins',
+                '& input': {
+                  fontFamily: 'Poppins',
                 },
               }}
             />

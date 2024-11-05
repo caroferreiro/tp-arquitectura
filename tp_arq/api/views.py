@@ -74,6 +74,13 @@ class PDIView(generics.ListAPIView):
     queryset = gestor_puntos.listarPDIs()
     serializer_class = PDISerializer
 
+class PDISearchView(generics.ListAPIView):
+    serializer_class = PDISerializer
+
+    def get_queryset(self):
+        nombre = self.request.query_params.get('nombre', None)
+        return gestor_puntos.buscarPDINombre(nombre)
+        
 class AgregarEvento(APIView):
     serializer_class = CreateEventoSerializer
     

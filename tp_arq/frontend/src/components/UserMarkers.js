@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Marker, Popup } from "react-leaflet";
 import { Link } from "react-router-dom";
-import L from "leaflet"; // Importa Leaflet directamente
-import "leaflet/dist/leaflet.css"; // Importa el CSS de Leaflet
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 import gastronomia from "./icons/gastronomia.png"; 
 import cultura from "./icons/cultura.png"; 
 import musica from "./icons/musica.png"; 
@@ -10,6 +10,7 @@ import arte from "./icons/arte.png";
 import naturaleza from "./icons/naturaleza.png"; 
 import cine from "./icons/cine.png"; 
 import deporte from "./icons/deporte.png"; 
+import blue_marker from "./icons/blue_marker.png"; 
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -116,7 +117,7 @@ const UserMarkers = ({ categoriaSeleccionada }) => {
       case "Cine":
         return cineIcon;
       default:
-        return L.Icon.Default;
+        return blue_marker;
     }
   };
 

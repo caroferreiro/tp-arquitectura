@@ -51,6 +51,11 @@ class GestorPDI:
             return PDI.objects.filter(estado=estado)
         return PDI.objects.all()
     
+    def buscarPDINombre(self, nombre=None):
+        if nombre:
+            return PDI.objects.filter(nombre__icontains=nombre)
+        return PDI.objects.none()
+    
     def buscarPDI(self, id):
         try:
             # Intentar encontrar un Evento con el ID
