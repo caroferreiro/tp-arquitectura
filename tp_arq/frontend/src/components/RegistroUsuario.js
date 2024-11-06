@@ -32,7 +32,7 @@ export default function RegistroUsuario() {
         if (response.ok) {
           navigate(`/mapa-usuario`);
         } else {
-            setError("Mail en uso"); 
+            setError("El mail ingresado ya está en uso"); 
         }
       })
       .catch((error) => {

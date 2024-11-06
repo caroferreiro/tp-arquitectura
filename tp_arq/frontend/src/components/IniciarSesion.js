@@ -76,25 +76,8 @@ export default function IniciarSesion() {
         </Button>
       </Grid>
       <Grid item xs={12} align="center">
-        <Button variant="outlined" color="secondary" component={Link} to="/" sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
+        <Button variant="outlined" color="secondary" component={Link} to="/registrarse" sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
           Atrás
-        </Button>
-      </Grid>
-      <Grid item xs={12} align="center">
-        <Button
-          component={Link}
-          to="/"
-          sx={{
-            color: "primary",
-            fontFamily: "Poppins",
-            fontWeight: 400,
-            textDecoration: "underline",
-            fontSize: 14,
-            marginTop: 2,
-            textTransform: "none"
-          }}
-        >
-          ¿Olvidaste tu contraseña?
         </Button>
       </Grid>
     </Grid>

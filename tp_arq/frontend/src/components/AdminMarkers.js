@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Marker, Popup } from "react-leaflet";
-import { Button } from "@mui/material"; 
+import { Button, Dialog, DialogActions, DialogTitle } from "@mui/material";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import redMarker from "./icons/red_marker.png"; 
-import blueMarker from "./icons/blue_marker.png"; 
+import redMarker from "./icons/red_marker.png";
+import blueMarker from "./icons/blue_marker.png";
 
 // Configurar los íconos personalizados para diferentes estados
 delete L.Icon.Default.prototype._getIconUrl;
@@ -27,10 +27,12 @@ const iconNoAprobado = new L.Icon({
     iconAnchor: [12, 41],
     popupAnchor: [12, -34],
     shadowSize: [80, 50],
-  });
+});
+
 
 const AdminMarkers = () => {
   const [PDIs, setPDIs] = useState([]);
+  const [openDialog, setOpenDialog] = useState(null); // Controlar diálogo para cada PDI
 
   useEffect(() => {
     const obtenerPDIs = async () => {
@@ -47,6 +49,14 @@ const AdminMarkers = () => {
     obtenerPDIs();
   }, []);
 
+  const handleOpenDialog = (id) => {
+    setOpenDialog(id); // Establecer el ID del PDI en el diálogo
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(null); // Cerrar el diálogo
+  };
+
   const handleEliminarPDI = async (id) => {
     try {
       const response = await fetch("/api/rechazar-pdi", {
@@ -59,6 +69,7 @@ const AdminMarkers = () => {
 
       if (response.ok) {
         setPDIs(PDIs.filter((pdi) => pdi.id !== id)); // Remover el PDI eliminado del estado
+        handleCloseDialog(); // Cerrar el diálogo después de eliminar
       } else {
         console.error("Error al eliminar el PDI:", response.statusText);
       }
@@ -85,7 +96,7 @@ const AdminMarkers = () => {
                   variant="contained"
                   color="error"
                   size="small"
-                  onClick={() => handleEliminarPDI(PDI.id)}
+                  onClick={() => handleOpenDialog(PDI.id)} // Abre el diálogo para el PDI específico
                   style={{
                     fontFamily: 'Poppins',
                     fontWeight: 300,
@@ -95,6 +106,29 @@ const AdminMarkers = () => {
                 >
                   Eliminar
                 </Button>
+                <Dialog
+                  open={openDialog === PDI.id} // Abrir diálogo solo si openDialog es igual al id del PDI
+                  onClose={handleCloseDialog}
+                  aria-labelledby="alert-dialog-title"
+                  aria-describedby="alert-dialog-description"
+                  maxWidth="xs" // Establece el tamaño máximo del diálogo
+                  fullWidth // Asegura que ocupe todo el ancho disponible según el maxWidth
+                  sx={{
+                    '& .MuiDialog-paper': { width: '400px', maxWidth: '100%' } // Personaliza el ancho específico
+                  }}
+              >
+                  <DialogTitle id="alert-dialog-title" sx={{ fontFamily: 'Poppins', fontWeight: 600, fontSize: 20 }}>
+                    {"¿Estás seguro que querés eliminar el punto de interés?"}
+                  </DialogTitle>
+                  <DialogActions>
+                    <Button onClick={handleCloseDialog} color="secondary" sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
+                      Atrás
+                    </Button>
+                    <Button onClick={() => handleEliminarPDI(PDI.id)} color="primary" autoFocus sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
+                      Confirmar
+                    </Button>
+                  </DialogActions>
+                </Dialog>
               </>
             )}
           </div>
