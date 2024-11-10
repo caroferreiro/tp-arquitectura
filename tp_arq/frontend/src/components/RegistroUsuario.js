@@ -48,7 +48,7 @@ export default function RegistroUsuario() {
           compact="h3"
           sx={{ marginBottom: 6, fontFamily: 'Poppins', fontWeight: 700, fontSize: 50 }} 
         >
-          Registrarse
+          Registrate
         </Typography>
       </Grid>
       <Grid item xs={12} align="center">
@@ -77,7 +77,7 @@ export default function RegistroUsuario() {
         </Grid>
       <Grid item xs={12} align="center">
         <Button variant="contained" color="primary" onClick={registrarseButtonPressed} sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
-          Registro
+          Registrarme
         </Button>
       </Grid>
       <Grid item xs={12} align="center">

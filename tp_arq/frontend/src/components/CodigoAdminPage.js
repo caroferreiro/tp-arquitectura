@@ -63,10 +63,9 @@ export default function CodigoAdminPage() {
   return (
     <Grid container spacing={1} direction="column" justifyContent="center">
       <Grid item xs={12} align="center">
-        <Typography
+      <Typography
           variant="h3"
-          compact="h3"
-          sx={{ marginBottom: 6, fontFamily: 'Poppins', fontWeight: 700, fontSize: 40 }} 
+          sx={{ marginBottom: 6, fontFamily: 'Poppins', fontWeight: 700, fontSize: 50, maxWidth: 800, }} 
         >
           Ingresá tu mail y el PIN para validarte como administrador
         </Typography>
