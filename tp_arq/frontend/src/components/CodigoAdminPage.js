@@ -31,7 +31,7 @@ export default function CodigoAdminPage() {
 
     // Validar el código
     if (code !== "ABCD") {
-      setErrorCode("Código inválido"); // Establece el mensaje de error para el código
+      setErrorCode("PIN inválido"); // Establece el mensaje de error para el código
       valid = false; // Establece que hay un error
     }
 
@@ -68,7 +68,7 @@ export default function CodigoAdminPage() {
           compact="h3"
           sx={{ marginBottom: 6, fontFamily: 'Poppins', fontWeight: 700, fontSize: 40 }} 
         >
-          Ingresá tu mail y el código para validarte como administrador
+          Ingresá tu mail y el PIN para validarte como administrador
         </Typography>
       </Grid>
       <Grid item xs={12} align="center">
@@ -87,8 +87,8 @@ export default function CodigoAdminPage() {
       <Grid item xs={12} align="center">
         <TextField
           error={!!errorCode} // Muestra error si hay un error en el código
-          label="Código"
-          placeholder="Ingresá el código"
+          label="PIN"
+          placeholder="Ingresá el PIN"
           type="password"
           value={code}
           helperText={errorCode} // Muestra el error de código

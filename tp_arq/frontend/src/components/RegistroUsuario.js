@@ -77,7 +77,7 @@ export default function RegistroUsuario() {
         </Grid>
       <Grid item xs={12} align="center">
         <Button variant="contained" color="primary" onClick={registrarseButtonPressed} sx={{ fontFamily: 'Poppins', fontWeight: 400 }}>
-          Registrarse
+          Registro
         </Button>
       </Grid>
       <Grid item xs={12} align="center">
