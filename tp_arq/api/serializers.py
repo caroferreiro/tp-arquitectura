@@ -64,16 +64,6 @@ class CreateEstablecimientoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Establecimiento
         fields = ('nombre', 'ciudad', 'direccion', 'categoria', 'descripcion', 'latitud', 'longitud')
-    
-class CreateImagenSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Imagen
-        fields = ('imagen',)
-    
-    def validate_imagen(self, value):
-        if not value.name.endswith(('.jpg', '.jpeg', '.png')):
-            raise serializers.ValidationError("La imagen debe ser un archivo JPEG o PNG.")
-        return value
 
 class UpdatePDISerializer(serializers.ModelSerializer):
     id = serializers.CharField(validators=[])
